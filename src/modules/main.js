@@ -16,9 +16,9 @@ export const beginData = data.sort(function(a, b) {
     return 0;
   });
 
-
 //Просто преобразование JSON в объект - все ОК!
 const dataNow = countValues(beginData, JSON.parse(JSON.stringify(currentData)), 1);
+
 
 show(beginData, 1);//Ничего не возвращают - ВСЕ ОК!
 show(beginData, 0);//Ничего не возвращают - ВСЕ ОК!
