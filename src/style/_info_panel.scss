@@ -1,0 +1,45 @@
+.parameters {
+    
+    width: 25%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10px;
+    position: relative;
+    z-index: -2;
+    display: flex;
+    &__text {
+        margin: 0;
+    }
+    &::before {        
+        position: relative;
+        height: 30px;
+        position: absolute;
+        top: -30px;
+        font-size: 20px;
+        color: red;
+    }
+    .danger-text {
+        color: red;        
+        margin: 0;
+        font-size: 16px;
+    }
+    &>div {
+        width: 50%;
+    }
+}
+#current-parameters::before {
+    content: 'Текущие показатели:';
+}
+#count-parameters::before {
+    content: 'Рассчитанные показатели:';
+}
+.hide {
+    opacity: 0;
+}
+.smaller {
+    color: red;
+    font-weight: bold;
+}
+.more {
+    color: green;
+    font-weight: bold;
+}

@@ -1,0 +1,23 @@
+.control-data {
+    width: 100%;    
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-auto-flow: row;
+    &__input {        
+        margin: 0 !important;
+        & span {
+            font-size: 10px !important;    
+            width: 70%;        
+        }
+        & input {
+            font-size: 10px !important;            
+        }
+    }
+}
+.access {
+    background-color: #fff;
+}
+.reject {
+    background-color: red;
+}

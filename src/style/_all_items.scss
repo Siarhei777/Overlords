@@ -1,0 +1,12 @@
+.all__items {
+    width: 10%;
+    height: 481px;
+    background-color: white;    
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;    
+    overflow-y: scroll;    
+    user-select: none;
+}

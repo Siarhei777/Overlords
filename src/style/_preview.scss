@@ -1,0 +1,60 @@
+.preview {
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;  
+    width: 70px;
+    height: 70px;   
+    position: relative;
+    &>span.important-text {
+        position: absolute;
+        width: 100%;
+        color: #fff;
+        font-weight: bold;
+        top: 20px;        
+        display: block;
+        margin: 0 auto;     
+        text-align: center;
+    }
+    #field1 &[data-bs-toggle='modal']:hover {
+        cursor: pointer;
+    }                  
+    &[data-atr='hovered']:hover {
+        transform: scale(5);
+        border-radius: 0;        
+        transition: .3s ease-in all;
+        opacity: .8;
+    }
+    #field2 &[data-bs-toggle='modal']:hover, .all__items &[data-bs-toggle='modal']:hover {
+        cursor: move;
+    }
+    &>div {
+        min-width: 50px;
+        font-size: 6px;            
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;                
+        display: none;
+        position: relative;
+        left: 100%;
+        top: 0;
+        border: 3px double black;        
+        &>p {
+            font-size: 2.5px;
+            width: 100%;
+            margin: 0;
+            color: $primary-text-color;
+            background-color: $primary-background-color;                            
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;                                
+            padding: .5px;                
+        }
+        &>p:first-child, .danger-text, &>p:last-child {
+            font-size: 2.8px;
+            color: red;
+            text-align: center;
+        }            
+    }        
+    &[data-atr='hovered']:hover > div{
+        display: flex;
+    }
+}
