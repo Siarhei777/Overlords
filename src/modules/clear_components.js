@@ -42,4 +42,16 @@ const clearAll = () => {
     clearComplect();
 }
 
-export {clearInputsValues, clearComplect, clearAll}
+//Remove all spinners after count all values
+const removeAllSpinners = () => {
+    
+    document.querySelectorAll('#field1>div').forEach(el => {
+        el.innerHTML = '';
+        el.classList.add('preview');
+    });
+
+    document.querySelector('.all__items-container').innerHTML = '';
+    document.querySelector('.main-spinner').remove();
+}
+
+export {clearInputsValues, clearComplect, clearAll, removeAllSpinners}

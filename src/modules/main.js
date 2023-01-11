@@ -10,11 +10,14 @@ import showInfo from './create_info_panel';
 import buttonVisibleControl from './buttons_visible_control';
 import initControl from './init_control';
 import prepareAllVariants from './prepare_all_variants';
+import { removeAllSpinners } from './clear_components';
 
 const mainControl = (data) => {
     
     beginData = data;    
     const dataNow = countValues(data, JSON.parse(JSON.stringify(currentData)), 1);
+
+    removeAllSpinners();
 
     show(data, 1);
     show(data, 0);
