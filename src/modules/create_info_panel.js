@@ -12,9 +12,7 @@ export default (idName, par) => {
     el1.innerHTML = '';
     const el2 = document.querySelector(`#${idName} .command`);
     el2.innerHTML = '';
-    let checkCommand = 0;
-
-    console.log(par);
+    let checkCommand = 0;    
 
     if (!par) {
         document.querySelector(`#${idName}`).classList.add('hide');

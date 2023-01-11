@@ -25,20 +25,28 @@ import bigImg10_2 from '../img/spearbig.jpg';
 import bigImg10_3 from '../img/lionspear.jpg';
 import bigImg5_3 from '../img/lionring.jpg';
 
+import changeAll from './change_all';
+
 export default (data, type) => {    
     const allData = (type == 1) ? data.filter(el => el.now) : data;    
   
  
     
-    if (!type) data.forEach(() => {
-        const el = document.createElement('div');
-        el.classList.add('preview');
-        el.setAttribute('data-bs-toggle', 'modal');
-        el.setAttribute('data-bs-target', '#exampleModal');                
-        document.getElementById('all-items').append(el);        
-    });
+    if (!type) {
+        data.forEach(() => {
+            const el = document.createElement('div');
+            el.classList.add('preview');
+            el.setAttribute('data-bs-toggle', 'modal');
+            el.setAttribute('data-bs-target', '#exampleModal');   
+            /* el.setAttribute('data-atr', 'hovered'); */
+            document.querySelector('.all__items-container').append(el);
+        });
+        document.querySelector('.all__items-container').style.width = `${100 * Math.ceil(document.querySelectorAll('.all__items-container>div').length / 12)}%`;
+        document.querySelector('.all__items-container').style.gridTtemplateColumns = `repeat(${100 * Math.ceil(document.querySelectorAll('.all__items-container>div').length / 12)}, 1fr 1fr)`;
+        changeAll(data);
+    }
 
-    const allElements = (type == 1) ? document.querySelectorAll('#field1>div') : (type == 2) ? document.querySelectorAll('#field2>div') : document.querySelectorAll('#all-items>div');
+    const allElements = (type == 1) ? document.querySelectorAll('#field1>div') : (type == 2) ? document.querySelectorAll('#field2>div') : document.querySelectorAll('.all__items-container>div');
 
     /*Для предварительной очистки поля 2:*/
     if (type == 2) {
@@ -107,16 +115,16 @@ export default (data, type) => {
         
         el.addEventListener('click', initModal);    
                 
-        if (type == 1) {
+        if (type) {
             el.addEventListener('mouseenter', () => {            
                 event.target.style.backgroundImage = `url(${event.target.bigImage})`;            
             });
             el.addEventListener('mouseleave', () => {            
                 event.target.style.backgroundImage = event.target.image;            
-            });
-        }
+            });    
+        }        
         
-    })
+    });
     if (type) {
         allData.forEach(element => {
             switch (element.type) {

@@ -3,7 +3,7 @@ import show from './create_info_panel';//Все ОК
 import { allVariants  } from './main';//Все ОК
 
 export default () => {
-
+    
     if (document.getElementById('accept').getAttribute('data-func') != 'countMaxValues') return;
 
     const result = JSON.parse(JSON.stringify(data));    

@@ -8,6 +8,10 @@
     <title>Подбор комплекта в игре Повелители</title>
 </head>
 <body>
+    <noscript style="display: block; padding: 10px; border: 2px solid white; background-color: red; text-align: center; color: white; font-size: 24px; font-weight: bold;">
+        При отключенном JavaScript корректная работа приложения невозможна!<br><br>
+        Включите JavaScript в настройках безопасности браузера.
+    </noscript>
     <header>
 
     </header>
@@ -61,16 +65,16 @@
     
         <div class="field__container">
             <div class="field" id="field2">
-                <div class="field__item1 preview" data-bs-toggle="" data-bs-target=""></div>
-                <div class="field__item2 preview" data-bs-toggle="" data-bs-target=""></div>
-                <div class="field__item3 preview" data-bs-toggle="" data-bs-target=""></div>
-                <div class="field__item4 preview" data-bs-toggle="" data-bs-target=""></div>
-                <div class="field__item5 preview" data-bs-toggle="" data-bs-target=""></div>
-                <div class="field__item6 preview" data-bs-toggle="" data-bs-target=""></div>
-                <div class="field__item7 preview" data-bs-toggle="" data-bs-target=""></div>
-                <div class="field__item8 preview" data-bs-toggle="" data-bs-target=""></div>
-                <div class="field__item9 preview" data-bs-toggle="" data-bs-target=""></div>
-                <div class="field__item10 preview" data-bs-toggle="" data-bs-target=""></div>        
+                <div class="field__item1 preview" data-bs-toggle="" data-bs-target="" data-atr="hovered"></div>
+                <div class="field__item2 preview" data-bs-toggle="" data-bs-target="" data-atr="hovered"></div>
+                <div class="field__item3 preview" data-bs-toggle="" data-bs-target="" data-atr="hovered"></div>
+                <div class="field__item4 preview" data-bs-toggle="" data-bs-target="" data-atr="hovered"></div>
+                <div class="field__item5 preview" data-bs-toggle="" data-bs-target="" data-atr="hovered"></div>
+                <div class="field__item6 preview" data-bs-toggle="" data-bs-target="" data-atr="hovered"></div>
+                <div class="field__item7 preview" data-bs-toggle="" data-bs-target="" data-atr="hovered"></div>
+                <div class="field__item8 preview" data-bs-toggle="" data-bs-target="" data-atr="hovered"></div>
+                <div class="field__item9 preview" data-bs-toggle="" data-bs-target="" data-atr="hovered"></div>
+                <div class="field__item10 preview" data-bs-toggle="" data-bs-target="" data-atr="hovered"></div>        
             </div>
             
             <nav aria-label="Page navigation example">
@@ -93,7 +97,22 @@
     
 
         <div class="all__items" id="all-items">
-
+            <div class="all__items-container"></div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item disabled" id="decrease2">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                    <li class="page-item disabled"><a class="page-link" href="#"><span id="item-now2">0</span> из <span id="item-all2">0</span></a></li>
+                    <li class="page-item disabled" id="increase2">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
 
@@ -214,6 +233,14 @@
                 <div class="input-group input-group-sm mb-3 control-data__input">    
                     <span class="input-group-text" id="damage">Урон</span>
                     <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="damage" name="damage" value="0" min="0" max="1000">
+                </div>                        
+                <div class="input-group input-group-sm mb-3 control-data__input">    
+                    <span class="input-group-text" id="sum3Parameters">Урон+Броня+Шок</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="sum3Parameters" name="sum3Parameters" value="0" min="0" max="1000">
+                </div>                        
+                <div class="input-group input-group-sm mb-3 control-data__input">    
+                    <span class="input-group-text" id="allParameters">Сумма всех</span>
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="allParameters" name="allParameters" value="0" min="0" max="1000">
                 </div>                        
             </form>
             <h5>В т.ч. параметры команды:</h5>

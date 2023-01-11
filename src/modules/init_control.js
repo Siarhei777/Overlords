@@ -7,9 +7,10 @@ import clearAll from './clear_all';//Очистка всех input
 import clearAllMax from './clear_all_max';//Очистка всего
 import clearComplect from './clear_complect';//Очистка комплектов
 import changeNumShow from './change_num_show';
+import listItems from './list_items';
 
 export default () => {    
-    document.getElementById('max-values').addEventListener('click', () => {
+    document.getElementById('max-values').addEventListener('click', () => {        
         userConfirm('Вы уверены, что хотите рассчитать максимально возможные параметры по всем имеющимся вещам?', 'countMaxValues');
     });
     document.getElementById('clear-all').addEventListener('click', () => {
@@ -37,4 +38,7 @@ export default () => {
 
     document.getElementById('decrease').addEventListener('click', function() {changeNumShow('dec')});
     document.getElementById('increase').addEventListener('click', function() {changeNumShow('inc')});
+
+    document.getElementById('decrease2').addEventListener('click', listItems);
+    document.getElementById('increase2').addEventListener('click', listItems);
 }

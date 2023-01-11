@@ -1,10 +1,12 @@
 export default (data, currentData, type) => {
-    let countTrapItems = 0, countLionItems = 0;
+    let countTrapItems = 0, countLionItems = 0;    
 
     data.forEach(el => {
 
-        countTrapItems = (el.complect == 2) ? ++countTrapItems : countTrapItems;
-        countLionItems = (el.complect == 3) ? ++countLionItems : countLionItems;
+        if ((el.now && type) || (!type)) {
+            countTrapItems = (el.complect == 2) ? ++countTrapItems : countTrapItems;
+            countLionItems = (el.complect == 3) ? ++countLionItems : countLionItems;
+        }    
 
         for (const prop in el) {
             if ((prop in currentData && el.now && type) || (prop in currentData && !type)) {
@@ -28,19 +30,22 @@ export default (data, currentData, type) => {
         }
     });
 
-    if (countTrapItems == 3) {        
+    
+
+    if (countTrapItems >= 3) {        
         currentData.damage.value += 3;
         currentData.accuracy.value += 2;
         currentData.damage.percent += 3;
-        currentData.damage.commandPercent += 3;
+        currentData.damage.commandPercent += 3;        
     }
-    if (countLionItems == 3) {        
+    if (countLionItems >= 3) {        
         currentData.damage.percent += 10;
         currentData.generalProtection.value += 10;
         currentData.hp.value += 130;
         currentData.damage.value += 10;
-        currentData.hp.commandvalue += 30;
+        currentData.hp.commandValue += 30;        
     }
+    
 
     for (let prop in currentData) {
         if (currentData[prop].value && currentData[prop].percent) {        
@@ -48,9 +53,25 @@ export default (data, currentData, type) => {
         }
     }
     
+    for (let prop in currentData) {
+        if (prop.indexOf('amage') == -1 && typeof currentData[prop] == 'object' && prop != 'allParameters' && prop != 'sum3Parameters') {
+            if (!currentData[prop].value && currentData[prop].percent) {
+                currentData.allParameters.value += currentData[prop].percent;    
+            } else if (currentData[prop].value) {
+                currentData.allParameters.value += currentData[prop].value;
+            }
+            
+        }
+    }
+
     currentData.allDamage.value = currentData.damage.value + currentData.damagePhisical.value + currentData.damagePoison.value + currentData.damageElectricity.value + currentData.damageWater.value + currentData.damageFair.value + currentData.damageDead.value + currentData.damageAstral.value;
 
-    console.log(currentData);
+   
+
+    currentData.allParameters.value += currentData.allDamage.value;
+    
+
+    currentData.sum3Parameters.value = currentData.allDamage.value + currentData.generalProtection.value + currentData.shock.value;    
 
     return currentData;
 }

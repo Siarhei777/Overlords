@@ -32,9 +32,7 @@ const findAllVariants = () => {
         if (check) {
             result.push(element);            
         }
-    });
-
-    console.log(result);
+    });    
 
     if (result.length) {
         document.getElementById('count-parameters').classList.remove('hide');             

@@ -7,6 +7,7 @@ const devMode = mode === 'development';
 const target = devMode ? 'web' : 'browserslist';
 const devtool = devMode ? 'source-map' : undefined;
 
+
 module.exports = {
     mode,
     target,
@@ -36,6 +37,13 @@ module.exports = {
             {
                 test: /\.html$/i,
                 loader: 'html-loader',
+            },    
+            {
+                test: /\.json$/i,        
+                type: 'asset/resource',                         
+                generator: {
+                    filename: 'data/[name][ext]'
+                }
             },
             {
                 test: /\.(c|sa|sc)ss$/i,

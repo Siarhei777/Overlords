@@ -1,5 +1,7 @@
 //Просто хранилище эталонного объекта - все ОК!
 export default {
+    sum3Parameters: {value: 0, percent: 0, name: 'Броня+Урон+Шок', commandValue: 0, commandPercent: 0},
+    allParameters: {value: 0, percent: 0, name: 'Сумма всех', commandValue: 0, commandPercent: 0},
     allDamage: {value: 0, percent: 0, name: 'Общий урон', commandValue: 0, commandPercent: 0},
     damagePhisical: {value: 0, percent: 0, name: 'Урон (Физич.)', commandValue: 0, commandPercent: 0},
     damagePoison: {value: 0, percent: 0, name: 'Урон (Яд)', commandValue: 0, commandPercent: 0},

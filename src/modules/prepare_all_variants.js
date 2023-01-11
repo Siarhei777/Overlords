@@ -31,18 +31,18 @@ export default (data) => {
             }            
         });
 
-        if (countTrapItems == 3) {        
+        if (countTrapItems >= 3) {        
             res.damage.value += 3;
             res.accuracy.value += 2;
             res.damage.percent += 3;
-            res.damage.commandPercent += 3;
+            res.damage.commandPercent += 3;            
         }
-        if (countLionItems == 3) {        
+        if (countLionItems >= 3) {        
             res.damage.percent += 10;
             res.generalProtection.value += 10;
             res.hp.value += 130;
             res.damage.value += 10;
-            res.hp.commandvalue += 30;
+            res.hp.commandValue += 30;            
         }
             
         for (let prop in res) {            
@@ -51,7 +51,24 @@ export default (data) => {
             }
         }
         
+        for (let prop in res) {
+            if (prop.indexOf('amage') == -1 && typeof res[prop] == 'object' && prop != 'allParameters' && prop != 'sum3Parameters') {                
+                if (!res[prop].value && res[prop].percent) {
+                    res.allParameters.value += res[prop].percent;    
+                } else if (res[prop].value) {
+                    res.allParameters.value += res[prop].value;
+                }
+                
+            }
+        }
+
         res.allDamage.value = res.damage.value + res.damagePhisical.value + res.damagePoison.value + res.damageElectricity.value + res.damageWater.value + res.damageFair.value + res.damageDead.value + res.damageAstral.value;
+
+        res.allParameters.value += res.allDamage.value;
+        
+
+        res.sum3Parameters.value = res.allDamage.value + res.generalProtection.value + res.shock.value;
+        
 
         return res;
     };
