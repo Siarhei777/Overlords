@@ -30,19 +30,19 @@ import changeAll from './change_all';
 export default (data, type) => {    
     const allData = (type == 1) ? data.filter(el => el.now) : data;    
   
- 
-    
     if (!type) {
         data.forEach(() => {
             const el = document.createElement('div');
             el.classList.add('preview');
             el.setAttribute('data-bs-toggle', 'modal');
-            el.setAttribute('data-bs-target', '#exampleModal');   
-            /* el.setAttribute('data-atr', 'hovered'); */
+            el.setAttribute('data-bs-target', '#exampleModal');               
             document.querySelector('.all__items-container').append(el);
         });
-        document.querySelector('.all__items-container').style.width = `${100 * Math.ceil(document.querySelectorAll('.all__items-container>div').length / 12)}%`;
-        document.querySelector('.all__items-container').style.gridTtemplateColumns = `repeat(${100 * Math.ceil(document.querySelectorAll('.all__items-container>div').length / 12)}, 1fr 1fr)`;
+        console.log('work!!!!!');
+        document.querySelector('.all__items-container').style.width = `${100 * Math.ceil((Array.from(document.querySelectorAll('.all__items-container>div')).filter(el => getComputedStyle(el).display == 'block')).length / 12)}%`;
+        document.querySelector('.all__items-container').style.gridTemplateColumns = `repeat(${Math.ceil((Array.from(document.querySelectorAll('.all__items-container>div')).filter(el => getComputedStyle(el).display === 'block')).length / 12)}, 1fr 1fr)`;
+        console.log(document.querySelector('.all__items-container').style.gridTemplateColumns);
+        console.log(document.querySelector('.all__items-container').style.width);
         changeAll(data);
     }
 

@@ -31,7 +31,4 @@ export default () => {
     
     show('count-parameters', result);
     
-
-    /* Завтра еще тут поискать вакансии: */
-    /* https://by.jobvk.com/minsk/obrazovatelyniy-tsentr-parka-visokih-tehnologiy */    
 }

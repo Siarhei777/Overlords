@@ -1,27 +1,38 @@
+/***********************************************************************************************/
+/* Controls the display management of available items not included in the current matched set. */
+/***********************************************************************************************/
 export default () => {    
-    document.querySelector('.all__items-container').style.width = `${+document.getElementById('item-all2').innerHTML * 100}%`;
-    document.querySelector('.all__items-container').style.gridTtemplateColumns = `repeat(${100 * Math.ceil(document.querySelectorAll('.all__items-container>div').length / 12)}, 1fr 1fr)`;
-    if ((document.getElementById('item-now2').innerHTML === '1' && event.currentTarget.id === 'decrease2') || (+document.getElementById('item-now2').innerHTML == Math.ceil(document.querySelectorAll('.all__items-container>div').length / 12) && event.currentTarget.id === 'increase2')) return;    
+    const container = document.querySelector('.all__items-container');
+    const containerElements = document.querySelectorAll('.all__items-container>div');
+    const itemNow = document.getElementById('item-now2');    
+    const itemAll = document.getElementById('item-all2');    
+    const increaseButton = document.getElementById('increase2');
+    const decreaseButton = document.getElementById('decrease2');
+    const countShowSlide = elements => Math.ceil((Array.from(elements).filter(el => getComputedStyle(el).display === 'block')).length / 12);
 
-    document.getElementById('increase2').classList.remove('disabled');
-    document.getElementById('decrease2').classList.remove('disabled');
+    container.style.width = `${Number(itemAll.innerHTML) * 100}%`;    
+    container.style.gridTtemplateColumns = `repeat(${countShowSlide(containerElements)}, 1fr 1fr)`;
+
+    if ((Number(itemNow.innerHTML) === 1 && event.currentTarget.id === 'decrease2') || (Number(itemNow.innerHTML) == countShowSlide(containerElements) && event.currentTarget.id === 'increase2')) return;
+
+    increaseButton.classList.remove('disabled');
+    decreaseButton.classList.remove('disabled');
 
     switch (event.currentTarget.id) {
         case 'decrease2':
-            document.getElementById('item-now2').innerHTML = +document.getElementById('item-now2').innerHTML - 1;
+            itemNow.innerHTML = Number(itemNow.innerHTML) - 1;
             break;
         case 'increase2':
-            document.getElementById('item-now2').innerHTML = +document.getElementById('item-now2').innerHTML + 1;
+            itemNow.innerHTML = Number(itemNow.innerHTML) + 1;
             break;
     }
 
-    document.querySelector('.all__items-container').style.left = `-${(+document.getElementById('item-now2').innerHTML - 1 ) * 100}%`;
+    container.style.left = `-${(Number(itemNow.innerHTML) - 1 ) * 100}%`;
 
-    if (document.getElementById('item-now2').innerHTML === '1') {
-        document.getElementById('decrease2').classList.add('disabled');
+    if (Number(itemNow.innerHTML) === 1) {
+        decreaseButton.classList.add('disabled');
     }
-    if (document.getElementById('item-now2').innerHTML == Math.ceil(document.querySelectorAll('.all__items-container>div').length / 12)) {
-        document.getElementById('increase2').classList.add('disabled');
+    if (Number(itemNow.innerHTML) == countShowSlide(containerElements)) {
+        increaseButton.classList.add('disabled');
     }
-
 }

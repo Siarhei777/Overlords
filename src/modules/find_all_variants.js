@@ -1,10 +1,10 @@
 import { allVariants } from "./main";
 import show from "./create_info_panel";
-import showPers from './init_elements';//Для создания человека со шмотками - все ОК!
+import showPers from './init_elements';
 import { beginData } from "./main";
 import changeAll from "./change_all";
 const result = [];
-import clearComplect from "./clear_complect";
+import {clearComplect} from "./clear_components";
 
 const findAllVariants = () => {
     if (document.getElementById('accept').getAttribute('data-func') != 'findAllVariants') return;

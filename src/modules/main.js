@@ -1,12 +1,15 @@
-import data from '../data/data'; //Все шмотки в непреобразованном виде - все ОК!
+/***************************************/
+/* The main module of the application. */
+/***************************************/
+import data from '../data/data';
 import readData from './read_data';
-import currentData from './init_data';//Эталонный объект - все ОК!
-import countValues from './count_parameters';//Функция для рассчета параметров - все ОК!
-import show from './init_elements';//Для создания человека со шмотками - все ОК!
-import showInfo from './create_info_panel';//Вывод инфы в окно - все ОК!
-import buttonVisibleControl from './buttons_visible_control';//Для изменения активности кнопок
+import currentData from './init_data';
+import countValues from './count_parameters';
+import show from './init_elements';
+import showInfo from './create_info_panel';
+import buttonVisibleControl from './buttons_visible_control';
 import initControl from './init_control';
-import prepareAllVariants from './prepare_all_variants';//Тут по идее все ОК
+import prepareAllVariants from './prepare_all_variants';
 
 const mainControl = (data) => {
     
