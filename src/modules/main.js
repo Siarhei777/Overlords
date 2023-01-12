@@ -1,7 +1,6 @@
 /***************************************/
 /* The main module of the application. */
 /***************************************/
-import data from '../data/data';
 import readData from './read_data';
 import CurrentData from './init_data';
 import countValues from './count_parameters';
@@ -15,19 +14,42 @@ import { removeAllSpinners } from './clear_components';
 const mainControl = (data) => {
     
     beginData = data;    
-    /* const dataNow = countValues(data, JSON.parse(JSON.stringify(currentData())), 1); */
     const dataNow = countValues(data, new CurrentData(), 1);
 
-    removeAllSpinners();
+    const appStart = () => {
+        removeAllSpinners();
 
-    show(data, 1);
-    show(data, 0);
+        show(data, 1);
+        show(data, 0);
+    
+        showInfo('current-parameters',dataNow);
+            
+        initControl();   
 
-    showInfo('current-parameters',dataNow);
+        buttonVisibleControl(document.getElementById('clear-all'), document.getElementById('clear-complect'), document.getElementById('clear-all-max'));        
+    }   
 
-    allVariants = prepareAllVariants(data);        
-    initControl();   
-    buttonVisibleControl(document.getElementById('clear-all'), document.getElementById('clear-complect'), document.getElementById('clear-all-max'));    
+    
+    if (typeof Worker !== 'undefined') {
+
+        const myWorker = new Worker('modules/web_worker.js');
+        
+        myWorker.postMessage(beginData);
+
+        myWorker.onmessage = function(e) {
+            allVariants = e.data;            
+            myWorker.terminate();
+            appStart();        
+        }
+        myWorker.onerror = (e) => {
+            allVariants = prepareAllVariants(dataNow);
+            appStart();    
+        }
+
+    } else {        
+        allVariants = prepareAllVariants(dataNow);
+        appStart();
+    }        
 }
 
 readData().then((data) => {

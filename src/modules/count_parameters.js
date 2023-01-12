@@ -50,5 +50,6 @@ export default (data, currentData, type) => {
     
     currentData.countSomeParameters();
 
-    return currentData;
+    return currentData;    
+    
 }

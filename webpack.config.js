@@ -106,6 +106,13 @@ module.exports = {
                     presets: ['@babel/preset-env']
                   }
                 }
+            },
+            {
+                test: /web_worker.js$/i,
+                type: 'asset/resource',                         
+                generator: {
+                    filename: 'modules/[name][ext]'
+                }
             }
         ]
     }
