@@ -1,3 +1,6 @@
+/*******************************************************/
+/*Search for all matches of kits with given parameters.*/
+/*******************************************************/
 import { allVariants } from "./main";
 import show from "./create_info_panel";
 import showPers from './init_elements';

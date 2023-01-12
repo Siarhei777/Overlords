@@ -1,15 +1,18 @@
-import data from './init_data';//Все Ок
-import show from './create_info_panel';//Все ОК
-import { allVariants  } from './main';//Все ОК
+/****************************************************************************************************/
+/* Based on the resulting array, we select the maximum indicators and return them for subsequent output. */
+/****************************************************************************************************/
+import Data from './init_data';
+import show from './create_info_panel';
+import { allVariants  } from './main';
 
 export default () => {
     
     if (document.getElementById('accept').getAttribute('data-func') != 'countMaxValues') return;
 
-    const result = JSON.parse(JSON.stringify(data));    
+    const result = new Data();
     
     allVariants.forEach(el => {
-        for (let prop in el) {
+        Object.keys(el).forEach(prop => {
             if (typeof el[prop] === 'object' && !(el[prop] instanceof Array)) {
                 if (el[prop].value > result[prop].value) {
                     result[prop].value = el[prop].value;
@@ -24,7 +27,7 @@ export default () => {
                     result[prop].commandPercent = el[prop].commandPercent;
                 }
             }
-        }
+        });
     });
 
     document.getElementById('count-parameters').classList.remove('hide');

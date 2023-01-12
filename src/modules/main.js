@@ -3,7 +3,7 @@
 /***************************************/
 import data from '../data/data';
 import readData from './read_data';
-import currentData from './init_data';
+import CurrentData from './init_data';
 import countValues from './count_parameters';
 import show from './init_elements';
 import showInfo from './create_info_panel';
@@ -15,7 +15,8 @@ import { removeAllSpinners } from './clear_components';
 const mainControl = (data) => {
     
     beginData = data;    
-    const dataNow = countValues(data, JSON.parse(JSON.stringify(currentData)), 1);
+    /* const dataNow = countValues(data, JSON.parse(JSON.stringify(currentData())), 1); */
+    const dataNow = countValues(data, new CurrentData(), 1);
 
     removeAllSpinners();
 

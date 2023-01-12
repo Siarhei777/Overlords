@@ -10,7 +10,7 @@ export default () => {
     const decreaseButton = document.getElementById('decrease2');
     const countShowSlide = elements => Math.ceil((Array.from(elements).filter(el => getComputedStyle(el).display === 'block')).length / 12);
 
-    container.style.width = `${Number(itemAll.innerHTML) * 100}%`;    
+    container.style.width = `${countShowSlide(containerElements) * 100}%`;    
     container.style.gridTtemplateColumns = `repeat(${countShowSlide(containerElements)}, 1fr 1fr)`;
 
     if ((Number(itemNow.innerHTML) === 1 && event.currentTarget.id === 'decrease2') || (Number(itemNow.innerHTML) == countShowSlide(containerElements) && event.currentTarget.id === 'increase2')) return;

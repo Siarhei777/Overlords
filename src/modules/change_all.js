@@ -6,9 +6,7 @@ export default (nums) => {
     const elementsContainer = document.querySelector('.all__items-container');
     elements.forEach((el, ind) => el.style.display = (nums.indexOf(ind) != -1) ? 'none' : 'block');    
 
-    const countShowFields = Math.ceil((Array.from(elements).filter(el => getComputedStyle(el).display == 'block')).length / 12);
-
-    console.log(countShowFields);
+    const countShowFields = Math.ceil((Array.from(elements).filter(el => getComputedStyle(el).display == 'block')).length / 12);    
 
     elementsContainer.style.left = '0px';
     document.getElementById('decrease2').classList.add('disabled');
@@ -21,5 +19,5 @@ export default (nums) => {
     }
 
     elementsContainer.style.width = `${100 * countShowFields}%`;
-    elementsContainer.style.gridTtemplateColumns = `repeat(${countShowFields}, 1fr 1fr)`;
+    elementsContainer.style.gridTemplateColumns = `repeat(${countShowFields}, 1fr 1fr)`;
 }

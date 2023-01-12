@@ -1,4 +1,6 @@
-//Служит для вывода подсчитанной информации в информационное окно. Все ОК!
+/************************************************************************/
+/* Displaying the characteristics of the kit in the information window. */
+/************************************************************************/
 export default (idName, par) => {
     
     const createElement = (name, content, classNm) => {
@@ -21,18 +23,17 @@ export default (idName, par) => {
 
     el1.append(createElement('p', 'Повелитель:', 'danger-text'));
 
-    //Для подсчета разницы:
     const countDifference = (elements, name, value, percent) => {
     
         const val = ([...elements].filter(el => el.innerHTML.trim().indexOf(`${name}:`) !== -1).length == 0) ? 0 : (([...elements].filter(el => el.innerHTML.trim().indexOf(`${name}:`) >= 0))[0].innerHTML).slice((([...elements].filter(el => el.innerHTML.trim().indexOf(`${name}:`) >= 0))[0].innerHTML.trim()).indexOf(':') + 1);
 
         if (value == 0 && percent == 0) {
-            if (Number.isNaN(Number(val))) {
+            if (Number.isNaN(Number(val))) {                
                 return `<span class="smaller">(-${val})</span>`
-            } else if (Number(val) == 0) {
+            } else if (Number(val) == 0) {                
                 return '';
-            } else if (Number(val) != 0) {
-                `<span class="smaller">(-${val})</span>`;
+            } else if (Number(val) != 0) {                
+                return `<span class="smaller">(-${val})</span>`;
             }            
         } else if (value != 0) {
             if (Number.isNaN(Number(val))) {
@@ -66,24 +67,25 @@ export default (idName, par) => {
         }
     }
 
-    //Все текущие значения:
     const currentValues = document.querySelectorAll('#current-parameters .main p.parameters__text');
     const currentCommandValues = document.querySelectorAll('#current-parameters .command p.parameters__text');
 
-    for (const prop in par) {    
+    Object.keys(par).forEach(prop => {
         if (!(par[prop] instanceof Array)) {
             el1.append(createElement('p', `${par[prop].name}: ${(par[prop].value || (par[prop].value === 0 && !par[prop].percent)) ? par[prop].value : par[prop].percent + '%'} ${(idName != 'current-parameters') ? countDifference(currentValues, par[prop].name, par[prop].value, par[prop].percent) : ''}`, 'parameters__text'));
 
             checkCommand = (par[prop].commandValue || par[prop].commandValue) ? ++checkCommand : checkCommand;
-        }        
-    }
-
+        }   
+    });
+   
     if (checkCommand) {
+
         el2.append(createElement('p', 'В т.ч. на команду:', 'danger-text'));
-        for (const prop in par) {        
+
+        Object.keys(par).forEach(prop => {
             if (par[prop].commandValue || par[prop].commandPercent) {
                 el2.append(createElement('p', `${par[prop].name}: ${(par[prop].commandValue || (par[prop].commandValue === 0 && !par[prop].commandPercent)) ? par[prop].commandValue : par[prop].commandPercent + '%'} ${(idName != 'current-parameters') ? countDifference(currentCommandValues, par[prop].name, par[prop].commandValue, par[prop].commandPercent) : ''}`, 'parameters__text'));
-            }            
-        }
+            }
+        });        
     }
 }

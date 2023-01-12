@@ -1,11 +1,15 @@
-//Модуль для преобразования исходного обьекта вещи в объект, удобный для подсчетов:
-export default (data, etalon) => {
-    const result = JSON.parse(JSON.stringify(etalon));
+/**********************************************/
+/*Transform data into a more usable structure.*/
+/**********************************************/
+import Etalon from './init_data';
+
+export default (data) => {
+    const result = new Etalon();
             
     result.type = data.type;
     result.complect = data.complect;
 
-    for (let prop in result) {
+    Object.keys(result).forEach(prop => {
         if (prop in data) {
             if (data[prop].value != 0 && typeof data[prop].value === 'number') {
                 result[prop].value = data[prop].value;
@@ -21,8 +25,8 @@ export default (data, etalon) => {
                 result[prop].percent += parseInt(data[prop].commandValue);
                 result[prop].commandPercent = parseInt(data[prop].commandValue);
             }   
-        }             
-    }
+        }
+    });
 
     return result;   
 }

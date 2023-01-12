@@ -1,4 +1,6 @@
-//Для инициализации шмоток параметрами - все ОК!
+/***********************************************************/
+/* Initialization of photo containers and item parameters. */
+/***********************************************************/
 import img1 from '../img/shlem.jpg';
 import img2 from '../img/mech.jpg';
 import img3 from '../img/bronya.jpg';
@@ -27,34 +29,39 @@ import bigImg5_3 from '../img/lionring.jpg';
 
 import changeAll from './change_all';
 
-export default (data, type) => {    
+export default (data, type) => {   
+
     const allData = (type == 1) ? data.filter(el => el.now) : data;    
-  
-    if (!type) {
+    let elements;
+    const container = document.querySelector('.all__items-container');
+
+    if (!type) {        
+
         data.forEach(() => {
             const el = document.createElement('div');
             el.classList.add('preview');
             el.setAttribute('data-bs-toggle', 'modal');
             el.setAttribute('data-bs-target', '#exampleModal');               
-            document.querySelector('.all__items-container').append(el);
+            container.append(el);
         });
-        console.log('work!!!!!');
-        document.querySelector('.all__items-container').style.width = `${100 * Math.ceil((Array.from(document.querySelectorAll('.all__items-container>div')).filter(el => getComputedStyle(el).display == 'block')).length / 12)}%`;
-        document.querySelector('.all__items-container').style.gridTemplateColumns = `repeat(${Math.ceil((Array.from(document.querySelectorAll('.all__items-container>div')).filter(el => getComputedStyle(el).display === 'block')).length / 12)}, 1fr 1fr)`;
-        console.log(document.querySelector('.all__items-container').style.gridTemplateColumns);
-        console.log(document.querySelector('.all__items-container').style.width);
+        
+        elements = document.querySelectorAll('.all__items-container>div');
+
+        container.style.width = `${100 * Math.ceil((Array.from(elements).filter(el => getComputedStyle(el).display == 'block')).length / 12)}%`;
+        container.style.gridTemplateColumns = `repeat(${Math.ceil((Array.from(elements).filter(el => getComputedStyle(el).display == 'block')).length / 12)}, 1fr 1fr)`;                
+
         changeAll(data);
     }
 
-    const allElements = (type == 1) ? document.querySelectorAll('#field1>div') : (type == 2) ? document.querySelectorAll('#field2>div') : document.querySelectorAll('.all__items-container>div');
-
-    /*Для предварительной очистки поля 2:*/
+    const allElements = (type == 1) ? document.querySelectorAll('#field1>div') : (type == 2) ? document.querySelectorAll('#field2>div') : elements;
+    
     if (type == 2) {
         allElements.forEach(el => {
             el.innerHTML = '';
             el.style.backgroundImage = 'none';
             el.setAttribute('data-bs-target', '');
             el.setAttribute('data-bs-toggle', '');
+            el.setAttribute('data-atr', '');            
         });          
         document.querySelectorAll('#field2 span').forEach(el => el.remove());
     }    
@@ -63,20 +70,20 @@ export default (data, type) => {
         allElements.forEach(el => {
             el.setAttribute('data-bs-target','#exampleModal');
             el.setAttribute('data-bs-toggle','modal');
+            el.setAttribute('data-atr', 'hovered');
         });
     }
     
     const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
     const bigImages = [bigImg1, bigImg2, bigImg3, bigImg4, bigImg5, bigImg6, bigImg7, bigImg8, bigImg9];
     let numRing = -1;
-
-
-    //Помещение контента с инфой внутрь элемента:
+    
     const createInfo = (el) => {
         let str = '<div>';
         let checkCommand = 0;
         str += `<p>${el.name}</p>`;
-        for (let prop in el) {
+
+        Object.keys(el).forEach(prop => {
             checkCommand = (el[prop].commandValue) ? ++checkCommand : checkCommand;
             if (el[prop].value || el[prop].value === 0) {
                 
@@ -86,10 +93,12 @@ export default (data, type) => {
                     str += `<p>${el[prop].name}: ${el[prop].value}</p>`;
                 }
             }            
-        }   
+        });
+        
         if (checkCommand) {
             str += `<p class="danger-text">Действует на команду:</p>`;
-            for (let prop in el) {
+
+            Object.keys(el).forEach(prop => {
                 if (el[prop].commandValue) {                
                     if (parseInt(el[prop].commandValue) > 0) {
                         str += ` <p>${el[prop].name}: +${el[prop].commandValue}</p>`;
@@ -97,7 +106,8 @@ export default (data, type) => {
                         str += ` <p>${el[prop].name}: ${el[prop].commandValue}</p>`;
                     }
                 }   
-            }                     
+            });
+
         }
         str += `<p>Уровень вещи: ${el.level}</p>`;
         str += '</div>';
@@ -117,9 +127,11 @@ export default (data, type) => {
                 
         if (type) {
             el.addEventListener('mouseenter', () => {            
+                if (type == 2 && event.target.getAttribute('data-atr') !== 'hovered') return;
                 event.target.style.backgroundImage = `url(${event.target.bigImage})`;            
             });
             el.addEventListener('mouseleave', () => {            
+                if (type == 2 && event.target.getAttribute('data-atr') !== 'hovered') return;
                 event.target.style.backgroundImage = event.target.image;            
             });    
         }        
@@ -186,6 +198,7 @@ export default (data, type) => {
         });    
     } else {
         let count = 0;
+        
         allData.forEach(element => {
             allElements[count].parameters = element;                
             allElements[count].innerHTML = createInfo(element);

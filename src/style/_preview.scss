@@ -22,7 +22,7 @@
     &[data-atr='hovered']:hover {        
         border-radius: 0;        
         transition: .3s ease-in all;        
-        z-index: 5000;    
+        z-index: 6000 !important;    
         #field1 & {
             transform: scale(4) translateX(35%);
         } 

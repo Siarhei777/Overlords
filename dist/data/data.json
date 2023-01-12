@@ -616,5 +616,38 @@
         "complect": 1,
         "type": 9,
         "level": 8
+    },
+    {        
+        "damageFair": {"value": 0, "name": "Урон (Огонь)", "commandValue": "4%"},        
+        "accuracy": {"value": 3, "name": "Точность атаки", "commandValue": 0},
+        "shock": {"value": 1, "name": "Шоковая атака", "commandValue": 0},        
+        "generalProtection": {"value": 5, "name": "Общая защита", "commandValue": 3},        
+        "fairResistance": {"value": 0, "name": "Сопр. (Огонь)", "commandValue": "5%"},        
+        "breakdownOfWaterProtection": {"value": 0, "name": "Пробой сопр. воде", "commandValue": "2%"},
+        "hp": {"value": 25, "name": "Здоровье", "commandValue": 0},
+        "damage": {"value": 3, "name": "Урон", "commandValue": 0},
+        "name": "Мифические Ботинки Света",
+        "now": 0,
+        "image": "sapogi.jpg",
+        "bigImage": "sapogibig.jpj",
+        "complect": 1,
+        "type": 6,
+        "level": 9
+    },
+    {
+        "damagePhisical": {"value": 9, "name": "Урон (Физич.)", "commandValue": 0},        
+        "damagePoison": {"value": 0, "name": "Урон (Яд)", "commandValue": "3%"},        
+        "breakdownOfGeneralProtection": {"value": 0, "name": "Пробой общей защиты", "commandValue": 3},
+        "breakdownOfPhysicalProtection": {"value": "9%", "name": "Пробой сопр. физ. урону", "commandValue": 0},        
+        "breakdownOfElectricityProtection": {"value": "4%", "name": "Пробой сопр. электричеству", "commandValue": 0},        
+        "hp": {"value": 31, "name": "Здоровье", "commandValue": 0},
+        "damage": {"value": 5, "name": "Урон", "commandValue": 0},
+        "name": "Мифические Перчатки Света",
+        "now": 0,
+        "image": "gloves.jpg",
+        "bigImage": "glovesbig.jpg",
+        "complect": 1,
+        "type": 4,
+        "level": 9
     }
 ]

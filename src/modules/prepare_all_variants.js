@@ -1,12 +1,15 @@
+/****************************************************************/
+/* A module for preparing an array of all possible kit options. */
+/****************************************************************/
 import modifyParameters from './modify_parameters';
-import etalon from './init_data';
+import Etalon from './init_data';
 
 export default (data) => {    
     const all = [];
     const allGroup = [[], [], [], [], [], [], [], [], [], []];    
 
     const countVal = (arr) => {
-        let res = JSON.parse(JSON.stringify(etalon));
+        const res = new Etalon();
         res.num = [];
 
         let countTrapItems = 0, countLionItems = 0;
@@ -19,7 +22,7 @@ export default (data) => {
                 ++countLionItems;
             }
 
-            for (let prop in el) {
+            Object.keys(el).forEach(prop => {
                 if (typeof el[prop] == 'object' && prop in res) {                    
                     res[prop].value += el[prop].value;
                     res[prop].percent += el[prop].percent;
@@ -28,7 +31,7 @@ export default (data) => {
                 } else if (prop === 'num') {
                     res.num.push(el.num);
                 }
-            }            
+            });            
         });
 
         if (countTrapItems >= 3) {        
@@ -45,36 +48,13 @@ export default (data) => {
             res.hp.commandValue += 30;            
         }
             
-        for (let prop in res) {            
-            if (res[prop].value > 0 && res[prop].percent > 0) {
-                res[prop].value += Math.ceil((res[prop].value * res[prop].percent) / 100);
-            }
-        }
-        
-        for (let prop in res) {
-            if (prop.indexOf('amage') == -1 && typeof res[prop] == 'object' && prop != 'allParameters' && prop != 'sum3Parameters') {                
-                if (!res[prop].value && res[prop].percent) {
-                    res.allParameters.value += res[prop].percent;    
-                } else if (res[prop].value) {
-                    res.allParameters.value += res[prop].value;
-                }
-                
-            }
-        }
-
-        res.allDamage.value = res.damage.value + res.damagePhisical.value + res.damagePoison.value + res.damageElectricity.value + res.damageWater.value + res.damageFair.value + res.damageDead.value + res.damageAstral.value;
-
-        res.allParameters.value += res.allDamage.value;
-        
-
-        res.sum3Parameters.value = res.allDamage.value + res.generalProtection.value + res.shock.value;
-        
+        res.countSomeParameters();
 
         return res;
     };
      
     data.forEach((el, ind) => {
-        const rez = modifyParameters(el, etalon);        
+        const rez = modifyParameters(el);
         rez.num = ind;
         allGroup[rez.type - 1].push(rez);
     });    
