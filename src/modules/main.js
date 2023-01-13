@@ -9,46 +9,42 @@ import showInfo from './create_info_panel';
 import buttonVisibleControl from './buttons_visible_control';
 import initControl from './init_control';
 import prepareAllVariants from './prepare_all_variants';
-import { removeAllSpinners } from './clear_components';
 
-const mainControl = (data) => {
-    
+const mainControl = (data) => {    
+
+    localStorage.setItem('checkDataReady', 'false');
+
     beginData = data;    
     const dataNow = countValues(data, new CurrentData(), 1);
-
-    const appStart = () => {
-        removeAllSpinners();
-
-        show(data, 1);
-        show(data, 0);
     
-        showInfo('current-parameters',dataNow);
-            
-        initControl();   
+    show(data, 1);
+    show(data, 0);
 
-        buttonVisibleControl(document.getElementById('clear-all'), document.getElementById('clear-complect'), document.getElementById('clear-all-max'));        
-    }   
+    showInfo('current-parameters',dataNow);
 
+    initControl();   
+
+    buttonVisibleControl(document.getElementById('clear-all'), document.getElementById('clear-complect'), document.getElementById('clear-all-max')); 
     
-    if (typeof Worker !== 'undefined') {
+    if (typeof Worker !== 'undefined') {        
 
         const myWorker = new Worker('modules/web_worker.js');
         
         myWorker.postMessage(beginData);
 
-        myWorker.onmessage = function(e) {
-            allVariants = e.data;            
-            myWorker.terminate();
-            appStart();        
+        myWorker.onmessage = function(e) {            
+            allVariants = e.data;                 
+            myWorker.terminate();            
+            localStorage.setItem('checkDataReady', 'true');     
         }
         myWorker.onerror = (e) => {
             allVariants = prepareAllVariants(dataNow);
-            appStart();    
+            localStorage.setItem('checkDataReady', 'true');     
         }
 
-    } else {        
+    } else {             
         allVariants = prepareAllVariants(dataNow);
-        appStart();
+        localStorage.setItem('checkDataReady', 'true');
     }        
 }
 

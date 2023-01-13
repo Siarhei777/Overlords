@@ -132,8 +132,8 @@ onmessage = (e) => {
         const rez = modifyParameters(el);
         rez.num = ind;
         allGroup[rez.type - 1].push(rez);
-    });    
-        
+    });        
+
     for (let i1 = 0; i1 < allGroup[0].length; i1++) {
         for (let i2 = 0; i2 < allGroup[1].length; i2++) {
             for (let i3 = 0; i3 < allGroup[2].length; i3++) {
@@ -193,6 +193,6 @@ onmessage = (e) => {
             }
         }        
     }
-
+    
     postMessage(all);
 }

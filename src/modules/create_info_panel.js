@@ -10,18 +10,18 @@ export default (idName, par) => {
         return newEl;
     }
 
-    const el1 = document.querySelector(`#${idName} .main`);
+    const el1 = document.querySelector(`#${idName} .parameters__mainContainer`);
     el1.innerHTML = '';
-    const el2 = document.querySelector(`#${idName} .command`);
+    const el2 = document.querySelector(`#${idName} .parameters__commandContainer`);
     el2.innerHTML = '';
     let checkCommand = 0;    
 
     if (!par) {
-        document.querySelector(`#${idName}`).classList.add('hide');
+/*         document.querySelector(`#${idName}`).classList.add('hide'); */
         return;
     }
 
-    el1.append(createElement('p', 'Повелитель:', 'danger-text'));
+    el1.append(createElement('h3', 'Характеристики повелителя:', 'info-block__header'));
 
     const countDifference = (elements, name, value, percent) => {
     
@@ -67,12 +67,12 @@ export default (idName, par) => {
         }
     }
 
-    const currentValues = document.querySelectorAll('#current-parameters .main p.parameters__text');
-    const currentCommandValues = document.querySelectorAll('#current-parameters .command p.parameters__text');
+    const currentValues = document.querySelectorAll('#current-parameters .parameters__mainContainer p.info-block__text');
+    const currentCommandValues = document.querySelectorAll('#current-parameters .parameters__commandContainer p.info-block__text');
 
     Object.keys(par).forEach(prop => {
         if (!(par[prop] instanceof Array)) {
-            el1.append(createElement('p', `${par[prop].name}: ${(par[prop].value || (par[prop].value === 0 && !par[prop].percent)) ? par[prop].value : par[prop].percent + '%'} ${(idName != 'current-parameters') ? countDifference(currentValues, par[prop].name, par[prop].value, par[prop].percent) : ''}`, 'parameters__text'));
+            el1.append(createElement('p', `${par[prop].name}: ${(par[prop].value || (par[prop].value === 0 && !par[prop].percent)) ? par[prop].value : par[prop].percent + '%'} ${(idName != 'current-parameters') ? countDifference(currentValues, par[prop].name, par[prop].value, par[prop].percent) : ''}`, 'info-block__text'));
 
             checkCommand = (par[prop].commandValue || par[prop].commandValue) ? ++checkCommand : checkCommand;
         }   
@@ -80,11 +80,11 @@ export default (idName, par) => {
    
     if (checkCommand) {
 
-        el2.append(createElement('p', 'В т.ч. на команду:', 'danger-text'));
+        el2.append(createElement('h3', 'В т.ч. на команду:', 'info-block__header'));
 
         Object.keys(par).forEach(prop => {
             if (par[prop].commandValue || par[prop].commandPercent) {
-                el2.append(createElement('p', `${par[prop].name}: ${(par[prop].commandValue || (par[prop].commandValue === 0 && !par[prop].commandPercent)) ? par[prop].commandValue : par[prop].commandPercent + '%'} ${(idName != 'current-parameters') ? countDifference(currentCommandValues, par[prop].name, par[prop].commandValue, par[prop].commandPercent) : ''}`, 'parameters__text'));
+                el2.append(createElement('p', `${par[prop].name}: ${(par[prop].commandValue || (par[prop].commandValue === 0 && !par[prop].commandPercent)) ? par[prop].commandValue : par[prop].commandPercent + '%'} ${(idName != 'current-parameters') ? countDifference(currentCommandValues, par[prop].name, par[prop].commandValue, par[prop].commandPercent) : ''}`, 'info-block__text'));
             }
         });        
     }

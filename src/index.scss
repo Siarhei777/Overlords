@@ -1,4 +1,7 @@
 @import 'libs/normalize.css';
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
 @import 'style/fonts';
 @import 'style/var';
 @import 'style/field';
@@ -7,5 +10,5 @@
 @import 'style/all_items';
 @import 'style/control_panel';
 @import 'style/control_data';
-@import 'style/style';
-@import 'style/spinner.scss';
+@import 'style/main';
+@import 'style/spinner';

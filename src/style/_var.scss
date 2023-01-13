@@ -1,5 +1,10 @@
-$primary-background-image: url(img/bg.jpg);
+/* $primary-background-image: url(img/bg.jpg); */
+$primary-text-color: #fff;
+$primary-background-color: #1e1c3f;
+$secondary-background-color: #25244b;
 $field-backgroud-image: url(img/field.jpg);
-
-$primary-text-color: #000;
-$primary-background-color: #fff;
+$header-background-color: $indigo-900;
+$pagination-background-color: $indigo-900;
+$primary-border-color: $indigo-900;
+$accept-button-background-color: $indigo-900;
+$reject-button-background-color: $red-500;

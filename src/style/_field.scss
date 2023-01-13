@@ -7,25 +7,7 @@
     height: 481px;
     grid-template-columns: 4.93% 6.09% 5.22% 9.53% 5.02% 4.9% 4.8% 18.39% 10.08% 5.92% 13.69% 5.4% 5.51%;
     grid-template-rows: 0.92% 2.7% 11.85% 2.03% 0.62% 14.55% 1.66% 14.55% 1.66% 14.55% 1.66% 14.55% 18.71%;
-    position: relative;
-    &::before {        
-        color: red;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 24px;        
-        font-weight: bold;
-        text-align: center;
-        position: relative;
-        top: -40px;        
-        display: inline-block;        
-        width: 100%;
-        z-index: -1;
-    }
-    &#field1::before {
-        content: 'Текущий комплект:';
-    }
-    &#field2::before {
-        content: 'Подобранный комплект:';
-    }
+    position: relative;    
     &__item1 {
         grid-column-start: 8;
         grid-row-start: 2;

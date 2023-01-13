@@ -41,7 +41,7 @@ export default (data, type) => {
             const el = document.createElement('div');
             el.classList.add('preview');
             el.setAttribute('data-bs-toggle', 'modal');
-            el.setAttribute('data-bs-target', '#exampleModal');               
+            el.setAttribute('data-bs-target', '#mainModal');
             container.append(el);
         });
         
@@ -68,7 +68,7 @@ export default (data, type) => {
     
     if (type == 2 && allData.length > 0) {
         allElements.forEach(el => {
-            el.setAttribute('data-bs-target','#exampleModal');
+            el.setAttribute('data-bs-target','#mainModal');
             el.setAttribute('data-bs-toggle','modal');
             el.setAttribute('data-atr', 'hovered');
         });
@@ -116,9 +116,9 @@ export default (data, type) => {
 
     const initModal = () => {
         event.preventDefault();        
-        document.getElementById('exampleModalLabel').innerHTML = event.currentTarget.parameters.name;
+        document.getElementById('mainModalLabel').innerHTML = event.currentTarget.parameters.name;
         document.getElementById('modal-image').src = event.currentTarget.bigImage;
-        document.querySelector('#exampleModal .modal-body .info').innerHTML = createInfo(event.currentTarget.parameters);
+        document.querySelector('#mainModal .modal-body .info').innerHTML = createInfo(event.currentTarget.parameters);
     }
 
     allElements.forEach(el => {

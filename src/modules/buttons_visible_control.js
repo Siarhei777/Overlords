@@ -5,7 +5,7 @@ export default (but1, but2, but3) => {
     setInterval(() => {
         
         const checkButton1 = Array.from(document.querySelectorAll(`#pers-data input, #command-data input`)).filter(el => el.value && el.value != '0').length;
-        const checkButton2 = document.querySelectorAll('#count-parameters .main > p, #count-parameters .command > p').length;
+        const checkButton2 = document.querySelectorAll('#count-parameters .info-block > p').length;
         
         (checkButton1) ? but1.classList.remove('disabled') : but1.classList.add('disabled');
         (checkButton2) ? but2.classList.remove('disabled') : but2.classList.add('disabled');

@@ -8,10 +8,16 @@
         margin: 0 !important;
         & span {
             font-size: 10px !important;    
-            width: 70%;        
+            width: 70%;      
+            color: $primary-text-color;
+            background-color: $secondary-background-color;
+            border-color: $primary-border-color;
         }
         & input {
-            font-size: 10px !important;            
+            font-size: 10px !important;  
+            color: $primary-text-color;
+            background-color: $secondary-background-color;
+            border-color: $primary-border-color;
         }
     }
 }

@@ -649,5 +649,23 @@
         "complect": 1,
         "type": 4,
         "level": 9
+    },
+    {        
+        "initiative": {"value": 4, "name": "Инициатива", "commandValue": 0},
+        "accuracy": {"value": 5, "name": "Точность атаки", "commandValue": 0},
+        "shock": {"value": 2, "name": "Шоковая атака", "commandValue": 0},     
+        "generalProtection": {"value": 0, "name": "Общая защита", "commandValue": 3},        
+        "breakdownOfGeneralProtection": {"value": 4, "name": "Пробой общей защиты", "commandValue": 0},
+        "breakdownOfWaterProtection": {"value": "5%", "name": "Пробой сопр. воде", "commandValue": 0},
+        "breakdownOfDeadProtection": {"value": 0, "name": "Пробой сопр. смерти", "commandValue": "2%"},
+        "hp": {"value": 10, "name": "Здоровье", "commandValue": 0},
+        "damage": {"value": 5, "name": "Урон", "commandValue": 0},
+        "name": "Мифические Перчатки Света",
+        "now": 0,
+        "image": "gloves.jpg",
+        "bigImage": "glovesbig.jpg",
+        "complect": 1,
+        "type": 4,
+        "level": 9
     }
 ]
