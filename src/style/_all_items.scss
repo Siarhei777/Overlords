@@ -21,18 +21,19 @@
     } 
 }
 nav {
+    margin-top: 10px;
     ul {
         display: flex;
         justify-content: center;
         li {
-            user-select: none;
+            user-select: none;            
             a {
                 background-color: $pagination-background-color !important;
-                color: $primary-text-color !important;
+                color: $primary-text-color !important;                
+                span {
+                    font-size: 14px;                        
+                }
             }
         }
-    }        
-    &.noVisible {
-        opacity: 0;
-    }
+    }            
 }

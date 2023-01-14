@@ -1,10 +1,29 @@
-/* $primary-background-image: url(img/bg.jpg); */
+//Colors:
+/* $main-header-color: rgba(255, 255, 255, 0.6); */
+$main-header-color: #fff;
+$main-header-shadow-color: rgba(255,255,255,0.1);
+
 $primary-text-color: #fff;
+$secondary-text-color: #b8bec5;
+
 $primary-background-color: #1e1c3f;
 $secondary-background-color: #25244b;
+
 $field-backgroud-image: url(img/field.jpg);
+
 $header-background-color: $indigo-900;
+
 $pagination-background-color: $indigo-900;
+
 $primary-border-color: $indigo-900;
+$secondary-border-color: $red-500;
+
 $accept-button-background-color: $indigo-900;
 $reject-button-background-color: $red-500;
+$primary-button-color: #25244b;
+$secondary-button-color: $red-800;
+
+$link-color: $indigo-900;
+
+//Fonts:
+$primary-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

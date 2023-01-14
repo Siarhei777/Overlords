@@ -4,7 +4,7 @@
     border-radius: 20px;  
     width: 70px;
     height: 70px;   
-    /* position: relative; */
+    
     &>span.important-text {
         position: relative;
         width: 100%;
@@ -58,7 +58,7 @@
             color: $primary-text-color;
             background-color: $primary-background-color;                            
             font-weight: bold;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;                                
+            font-family: $primary-font-family; 
             padding: .5px;                
         }
         &>p:first-child, .danger-text, &>p:last-child {
