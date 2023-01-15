@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        console.time('val1');
+
+        const all = [[12, 13, 14], [15, 16], [17, 18], [19, 20, 21, 22],[1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11], [23, 24, 25, 26, 27], [28], [29, 30, 31, 32], [33, 34], [35, 36, 37, 38, 39, 40]];
+       
+        const rezArray = [];
+        const promArray = [];
+
+        const indexes = [[{num: 0, start: 0}, {num: 1, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 7, start: 0}, {num: 8, start: 0}], [{num: 0, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 8, start: 0}, {num: 9, start: 0}]];
+        
+        let count = 0;
+
+        indexes.forEach(arr => {
+            for (let col1 = 0; col1 < all[4].length - 1; col1++) {
+                for (let col2 = col1 + 1; col2 < all[4].length; col2++) {
+
+                    let checkEnd = arr.length - 2;
+                    let con2 = 0;
+                    do {
+                        promArray.length = 0;
+                        promArray.push(all[4][col1]);
+                        promArray.push(all[4][col2]);
+                        
+                        arr.forEach(el => {
+                            promArray.push(all[el.num][el.start]);
+                        });                
+
+                        rezArray.push(promArray.slice(0));                    
+
+                        let checkMain = false;
+
+                        for (let dop = arr.length - 1; dop >= checkEnd; dop--) {                        
+                            if (checkEnd == -1) {
+                                checkMain = true;
+                                break;
+                            }
+                            
+                            arr[dop]['start'] = arr[dop]['start'] + 1;
+            
+                            if (arr[dop].start < all[arr[dop]['num']].length) {
+                                break;
+                            } else {
+                                arr[dop].start = 0;
+                                if (dop == checkEnd) --checkEnd;                            
+                            }                        
+                        }                    
+                        if (checkMain) break;
+                    } while (true);
+                }
+            }
+        });
+
+        
+
+        console.timeEnd('val1');
+
+        console.log(rezArray);
+        
+    </script>
+</body>
+</html>

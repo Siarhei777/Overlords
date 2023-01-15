@@ -49,42 +49,65 @@ class Etalon {
 
     }
 }
+ 
+const findMaxValues = (el, rezArray) => {
+    
+        Object.keys(el).forEach(prop => {
+            if (typeof el[prop] === 'object' && !(el[prop] instanceof Array)) {
 
-const modifyParameters = (data) => {
-    const result = new Etalon();
-            
-    result.type = data.type;
-    result.complect = data.complect;
-
-    Object.keys(result).forEach(prop => {
-        if (prop in data) {
-            if (data[prop].value != 0 && typeof data[prop].value === 'number') {
-                result[prop].value = data[prop].value;
+                ['value', 'percent', 'commandValue', 'commandPercent'].forEach(innerProp => {
+                    if (el[prop][innerProp] > rezArray[prop][innerProp]) {
+                        rezArray[prop][innerProp] = el[prop][innerProp];
+                    }    
+                });
+                
             }
-            if (parseInt(data[prop].value) != 0 && typeof data[prop].value === 'string') {
-                result[prop].percent = parseInt(data[prop].value);
-            }
-            if (data[prop].commandValue != 0 && typeof data[prop].commandValue === 'number') {
-                result[prop].value += data[prop].commandValue;
-                result[prop].commandValue = data[prop].commandValue;
-            }
-            if (parseInt(data[prop].commandValue) != 0 && typeof data[prop].commandValue === 'string') {
-                result[prop].percent += parseInt(data[prop].commandValue);
-                result[prop].commandPercent = parseInt(data[prop].commandValue);
-            }   
-        }
-    });
-
-    return result;   
+        }); 
 }
 
+
 onmessage = (e) => {    
-    const all = [];
-    const allGroup = [[], [], [], [], [], [], [], [], [], []];    
-    const data = e.data;
+    const data = e.data.object;
+    const rezArray = new Etalon();
+    const funcName = e.data.func;   
+    let forms;
+
+    if (funcName == 'find_all_variants') {
+        forms = e.data.forms;
+        forms = forms.filter(el => Number(el.value) > 0);
+    }
+        
+    const promArray = [];
+    
+    const all = [[], [], [], [], [], [], [], [], [], []];
+
+
+
+    const checkForms = (element, forms) => {
+        
+        let check = true;        
+        forms.forEach(el => {
+            let val = Number(el.value);
+            
+            if (el.command) {                    
+                if ((val && !element[`${el.name}`].commandValue && !element[`${el.name}`].commandPercent) || (element[`${el.name}`].commandValue && val > element[`${el.name}`].commandValue) || (element[`${el.name}`].commandPercent && val > element[`${el.name}`].commandPercent)) {
+                    check = false;
+                }
+            } else {
+                if ((val && !element[`${el.name}`].value && !element[`${el.name}`].percent) || (element[`${el.name}`].value && val > element[`${el.name}`].value) || (element[`${el.name}`].percent && val > element[`${el.name}`].percent)) {
+                    check = false;
+                }                    
+            }   
+                     
+        });
+
+        return check;
+    }
+
 
     const countVal = (arr) => {
         const res = new Etalon();
+        
         res.num = [];
 
         let countTrapItems = 0, countLionItems = 0;
@@ -128,71 +151,70 @@ onmessage = (e) => {
         return res;
     };
      
-    data.forEach((el, ind) => {
-        const rez = modifyParameters(el);
-        rez.num = ind;
-        allGroup[rez.type - 1].push(rez);
-    });        
+    data.forEach((el, ind, arr) => {                
+        arr[ind].num = ind;
+        all[arr[ind].type - 1].push(ind);
+    });       
 
-    for (let i1 = 0; i1 < allGroup[0].length; i1++) {
-        for (let i2 = 0; i2 < allGroup[1].length; i2++) {
-            for (let i3 = 0; i3 < allGroup[2].length; i3++) {
-                for (let i4 = 0; i4 < allGroup[3].length; i4++) {
-                    for (let i5 = 0; i5 < allGroup[4].length - 1; i5++) {
-                        for (let i6 = i5 + 1; i6 < allGroup[4].length; i6++) {
-                            for (let i7 = 0; i7 < allGroup[5].length; i7++) {
-                                for (let i8 = 0; i8 < allGroup[6].length; i8++) {
-                                    for (let i9 = 0; i9 < allGroup[7].length; i9++) {
-                                        for (let i10 = 0; i10 < allGroup[8].length; i10++) {
-                                            all.push(countVal([allGroup[0][i1],
-                                                              allGroup[1][i2],
-                                                              allGroup[2][i3],
-                                                              allGroup[3][i4],
-                                                              allGroup[4][i5],
-                                                              allGroup[4][i6],
-                                                              allGroup[5][i7],
-                                                              allGroup[6][i8],
-                                                              allGroup[7][i9],
-                                                              allGroup[8][i10]]));
-                                        }
-                                    }
-                                    
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }                                        
-    }    
-
-    for (let i1 = 0; i1 < allGroup[0].length; i1++) {        
-        for (let i3 = 0; i3 < allGroup[2].length; i3++) {
-            for (let i4 = 0; i4 < allGroup[3].length; i4++) {
-                for (let i5 = 0; i5 < allGroup[4].length - 1; i5++) {
-                    for (let i6 = i5 + 1; i6 < allGroup[4].length; i6++) {
-                        for (let i7 = 0; i7 < allGroup[5].length; i7++) {
-                            for (let i8 = 0; i8 < allGroup[6].length; i8++) {      
-                                for (let i9 = 0; i9 < allGroup[8].length; i9++) {      
-                                    for (let i10 = 0; i10 < allGroup[9].length; i10++) {
-                                        all.push(countVal([allGroup[0][i1],
-                                                            allGroup[2][i3],
-                                                            allGroup[3][i4],
-                                                            allGroup[4][i5],
-                                                            allGroup[4][i6],
-                                                            allGroup[5][i7],
-                                                            allGroup[6][i8],
-                                                            allGroup[8][i9],
-                                                            allGroup[9][i10]]));
-                                    }                        
-                                }                                                                
-                            }
-                        }
-                    }
-                }
-            }
-        }        
-    }
+    const indexes = [[{num: 0, start: 0}, {num: 1, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 7, start: 0}, {num: 8, start: 0}], [{num: 0, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 8, start: 0}, {num: 9, start: 0}]];
     
-    postMessage(all);
+    let count = 0;
+
+    indexes.forEach(arr => {
+        for (let col1 = 0; col1 < all[4].length - 1; col1++) {
+            for (let col2 = col1 + 1; col2 < all[4].length; col2++) {
+
+                let checkEnd = arr.length - 2;
+                
+                do {
+                    promArray.length = 0;
+                    promArray.push(all[4][col1]);
+                    promArray.push(all[4][col2]);
+                    
+                    arr.forEach(el => {
+                        promArray.push(all[el.num][el.start]);
+                    });                
+
+                    switch (funcName) {
+                        case 'count_max_values':
+                            findMaxValues(countVal((promArray.slice(0)).map(val => data[val])),rezArray);        
+                            break;
+                        case 'find_all_variants':
+                            if (checkForms(countVal((promArray.slice(0)).map(val => data[val])), forms)) {
+                                postMessage(countVal((promArray.slice(0)).map(val => data[val])));
+                            }
+                            break;
+                    }
+
+                    let checkMain = false;
+
+                    for (let dop = arr.length - 1; dop >= checkEnd; dop--) {                        
+                        if (checkEnd == -1) {
+                            checkMain = true;
+                            break;
+                        }
+                        
+                        arr[dop]['start'] = arr[dop]['start'] + 1;
+        
+                        if (arr[dop].start < all[arr[dop]['num']].length) {
+                            break;
+                        } else {
+                            arr[dop].start = 0;
+                            if (dop == checkEnd) --checkEnd;                            
+                        }                        
+                    }                    
+                    if (checkMain) break;
+                } while (true);
+            }
+        }
+    });
+    
+    switch (funcName) {
+        case 'count_max_values':
+            postMessage(rezArray);
+            break; 
+        case 'find_all_variants':
+            postMessage(null);
+            break; 
+    }
 }

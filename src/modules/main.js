@@ -12,10 +12,11 @@ import prepareAllVariants from './prepare_all_variants';
 
 const mainControl = (data) => {    
 
-    localStorage.setItem('checkDataReady', 'false');
+    localStorage.setItem('checkDataReady', 'true');
 
-    beginData = data;    
-    const dataNow = countValues(data, new CurrentData(), 1);
+    beginData = data;//Все вещи        
+
+    const dataNow = countValues(data, new CurrentData(), 1);//Показетели текущего комплекта    
     
     show(data, 1);
     show(data, 0);
@@ -25,8 +26,12 @@ const mainControl = (data) => {
     initControl();   
 
     buttonVisibleControl(document.getElementById('clear-all'), document.getElementById('clear-complect'), document.getElementById('clear-all-max')); 
+
+
+
+
     
-    if (typeof Worker !== 'undefined') {        
+/*     if (typeof Worker !== 'undefined') {        
 
         const myWorker = new Worker('modules/web_worker.js');
         
@@ -45,11 +50,12 @@ const mainControl = (data) => {
     } else {             
         allVariants = prepareAllVariants(dataNow);
         localStorage.setItem('checkDataReady', 'true');
-    }        
+    }    */     
 }
+
 
 readData().then((data) => {
     mainControl(data);
 });
 
-export let allVariants, beginData;
+export let beginData, allVariants;

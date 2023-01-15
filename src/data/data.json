@@ -703,5 +703,22 @@
         "complect": 1,
         "type": 3,
         "level": 9
+    },
+    {        
+        "damageElectricity": {"value": 0, "name": "Урон (Электр.)", "commandValue": "4%"},        
+        "initiative": {"value": 6, "name": "Инициатива", "commandValue": 0},
+        "accuracy": {"value": 4, "name": "Точность атаки", "commandValue": 0},        
+        "antiShock": {"value": 0, "name": "Устойчивость к шоку", "commandValue": 4},        
+        "fairResistance": {"value": 0, "name": "Сопр. (Огонь)", "commandValue": "5%"},        
+        "breakdownOfGeneralProtection": {"value": 0, "name": "Пробой общей защиты", "commandValue": 2},        
+        "hp": {"value": 15, "name": "Здоровье", "commandValue": 0},
+        "damage": {"value": 2, "name": "Урон", "commandValue": 0},
+        "name": "Мифическое Кольцо Капкана",
+        "now": 0,
+        "image": "kolco.jpg",
+        "bigImage": "kolcobig.jpg",
+        "complect": 2,
+        "type": 5,
+        "level": 9
     }
 ]

@@ -3,32 +3,68 @@
 /****************************************************************************************************/
 import Data from './init_data';
 import show from './create_info_panel';
-import { allVariants  } from './main';
+import { beginData } from './main';
+import modifyParameters from './modify_parameters';
 
 export default () => {
     
-    if (document.getElementById('accept').getAttribute('data-func') != 'countMaxValues') return;
-
-    const result = new Data();
+    if (document.getElementById('accept').getAttribute('data-func') != 'countMaxValues') return;    
     
-    allVariants.forEach(el => {
+    localStorage.setItem('checkDataReady', 'false');
+    let result = null;
+
+    const modData = beginData.map(el => modifyParameters(el));
+    console.log(modData);
+
+    if (typeof Worker !== 'undefined') {        
+
+        const myWorker = new Worker('modules/web_worker.js');
+        
+        console.time('val1');
+
+        const dataWorker = {
+            object: modData,            
+            func: 'count_max_values'
+        };
+
+        myWorker.postMessage(dataWorker);
+
+        myWorker.onmessage = function(e) {            
+            result = e.data;      
+            console.log(result);
+            myWorker.terminate();            
+            localStorage.setItem('checkDataReady', 'true');     
+            document.getElementById('count-parameters').classList.remove('hide');
+    
+            console.timeEnd('val1');
+            show('count-parameters', result);
+        }
+        /* myWorker.onerror = (e) => {
+            allVariants = prepareAllVariants(dataNow);
+            localStorage.setItem('checkDataReady', 'true');     
+        } */
+
+    } else {             
+        /* allVariants = prepareAllVariants(dataNow);
+        localStorage.setItem('checkDataReady', 'true'); */
+    }    
+
+
+/*     allVariants.forEach(el => {
         Object.keys(el).forEach(prop => {
             if (typeof el[prop] === 'object' && !(el[prop] instanceof Array)) {
-                if (el[prop].value > result[prop].value) {
-                    result[prop].value = el[prop].value;
-                }
-                if (el[prop].percent > result[prop].percent) {
-                    result[prop].percent = el[prop].percent;
-                }
-                if (el[prop].commandValue > result[prop].commandValue) {
-                    result[prop].commandValue = el[prop].commandValue;
-                }
-                if (el[prop].commandPercent > result[prop].commandPercent) {
-                    result[prop].commandPercent = el[prop].commandPercent;
-                }
+
+                ['value', 'percent', 'commandValue', 'commandPercent'].forEach(innerProp => {
+                    if (el[prop][innerProp] > result[prop][innerProp]) {
+                        result[prop][innerProp] = el[prop][innerProp];
+                    }    
+                });
+                
             }
         });
-    });
+    }); */
+
+
 
     document.getElementById('count-parameters').classList.remove('hide');
     
