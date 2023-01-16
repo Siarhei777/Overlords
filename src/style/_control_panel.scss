@@ -26,6 +26,9 @@
             &:hover {
                 color: $secondary-button-color;
             }
-        }        
+        }     
+        &:hover {
+            cursor: pointer;
+        }   
     }
 }    

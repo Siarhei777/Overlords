@@ -1,21 +1,33 @@
 /*******************************************************/
 /*Search for all matches of kits with given parameters.*/
 /*******************************************************/
-import { allVariants } from "./main";
 import show from "./create_info_panel";
 import showPers from './init_elements';
 import { beginData } from "./main";
 import changeAll from "./change_all";
-const result = [];
 import {clearComplect} from "./clear_components";
 import modifyParameters from "./modify_parameters";
+const result = [];
 
 const findAllVariants = () => {
     if (document.getElementById('accept').getAttribute('data-func') != 'findAllVariants') return;
-    
+
+    const progress = document.getElementById('main-spinner');
+
+    const changeVisibleElements = (text, storage, visible, infoVisible, val = 0) => {
+        localStorage.setItem('checkDataReady', storage);        
+        (visible) ? progress.classList.remove('hidden') : progress.classList.add('hidden');
+        progress.querySelector('.progress-bar').style.width = `${val}%`;
+        progress.querySelector('.progress-bar').setAttribute('aria-valuenow', val);        
+        progress.querySelector('.progress__info').classList.remove('hidden');
+        progress.querySelector('.progress__info').innerHTML = text;
+
+    }
+
     result.length = 0;
 
     const allData = document.querySelectorAll('.control-data__input input');      
+    localStorage.setItem('check', 'all');
     
     const forms = Array.from(allData).map(el => {
         return {
@@ -28,6 +40,9 @@ const findAllVariants = () => {
 
     const modData = beginData.map(el => modifyParameters(el));
     console.log(modData);
+    document.getElementById('main-spinner').style.animationName = '';
+
+    let countVal = 0;
 
     if (typeof Worker !== 'undefined') {        
 
@@ -47,13 +62,26 @@ const findAllVariants = () => {
 
         myWorker.onmessage = function(e) {            
             if (e.data) {
-                result.push(e.data);
-                /* console.log('find!'); */
+                if (typeof e.data == 'number') {
+                    changeVisibleElements(`Подобрано: ${countVal}`, 'false', true, false, e.data);
+                } else {
+                    result.push(e.data);    
+                    ++countVal;
+                }                
             } else {
+                changeVisibleElements(`Подобрано: ${countVal}`, 'false', true, false, e.data);
                 myWorker.terminate();    
+                localStorage.setItem('result', null);
                 console.timeEnd('val2');
+
+                document.getElementById('main-spinner').style.animationName = 'slowHide';
+    
+                setTimeout(() => {
+                    changeVisibleElements('', 'true', false, true);
+                }, 2000);
+
                 if (result.length) {
-                    document.getElementById('count-parameters').classList.remove('hide');             
+                    document.getElementById('count-parameters').classList.remove('hide');
                     showPers(beginData.filter((el, ind) => result[0].num.indexOf(ind) !== -1), 2);
                     changeAll(result[0].num);
                     show('count-parameters', result[0]);
@@ -62,7 +90,7 @@ const findAllVariants = () => {
                     if (result.length > 1) {
                         document.getElementById('increase').classList.remove('disabled');
                     }
-                } else {
+                } else {                    
                     document.getElementById('item-now').innerHTML = 0;
                     document.getElementById('item-all').innerHTML = 0;
                     document.getElementById('increase').classList.add('disabled');
@@ -72,76 +100,15 @@ const findAllVariants = () => {
                     show('count-parameters', null);
                     clearComplect();
                 }            
-            }            
-            /* localStorage.setItem('checkDataReady', 'true');     
-            document.getElementById('count-parameters').classList.remove('hide'); */
-    
-            
-            
+            }                                            
         }
-        /* myWorker.onerror = (e) => {
-            allVariants = prepareAllVariants(dataNow);
-            localStorage.setItem('checkDataReady', 'true');     
-        } */
+        myWorker.onerror = (e) => {
+            /*Add error info!!!*/
+        }
 
     } else {             
-        /* allVariants = prepareAllVariants(dataNow);
-        localStorage.setItem('checkDataReady', 'true'); */
-    }    
-
-
-
-
-
-
-
-
-
-
-
-
-
-   /*  allVariants.forEach(element => {
-        let check = true;        
-        allData.forEach(el => {
-            let val = Number(el.value);
-            if (val) {                
-                if (el.classList.contains('command')) {                    
-                    if ((val && !element[`${el.name}`].commandValue && !element[`${el.name}`].commandPercent) || (element[`${el.name}`].commandValue && val > element[`${el.name}`].commandValue) || (element[`${el.name}`].commandPercent && val > element[`${el.name}`].commandPercent)) {
-                        check = false;
-                    }
-                } else {
-                    if ((val && !element[`${el.name}`].value && !element[`${el.name}`].percent) || (element[`${el.name}`].value && val > element[`${el.name}`].value) || (element[`${el.name}`].percent && val > element[`${el.name}`].percent)) {
-                        check = false;
-                    }                    
-                }   
-            }                
-        });
-        if (check) {
-            result.push(element);            
-        }
-    });    
- */
-/*     if (result.length) {
-        document.getElementById('count-parameters').classList.remove('hide');             
-        showPers(beginData.filter((el, ind) => result[0].num.indexOf(ind) !== -1), 2);
-        changeAll(result[0].num);
-        show('count-parameters', result[0]);
-        document.getElementById('item-now').innerHTML = 1;
-        document.getElementById('item-all').innerHTML = result.length;
-        if (result.length > 1) {
-            document.getElementById('increase').classList.remove('disabled');
-        }
-    } else {
-        document.getElementById('item-now').innerHTML = 0;
-        document.getElementById('item-all').innerHTML = 0;
-        document.getElementById('increase').classList.add('disabled');
-        document.getElementById('decrease').classList.add('disabled');
-        changeAll([]);
-        showPers([], 2);        
-        show('count-parameters', null);
-        clearComplect();
-    }    */ 
+        /*Add error info!!!*/
+    }       
 };
 
-export { findAllVariants, result };
+export { findAllVariants, result }

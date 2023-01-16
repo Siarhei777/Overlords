@@ -4,10 +4,11 @@
 import countMaxValues from './count_max_values';
 import userConfirm from './user_confirm';
 import checkForm from './check_form';
-import {findAllVariants} from './find_all_variants';
 import {clearInputsValues, clearComplect, clearAll} from './clear_components';
 import changeNumShow from './change_num_show';
 import listItems from './list_items';
+import { findAllVariants } from './find_all_variants';
+import {topValues} from './top_values';
 
 export default () => { 
     
@@ -15,27 +16,20 @@ export default () => {
         return localStorage.getItem('checkDataReady');
     }
 
-    const checkDataReady = (func) => {     
-        const info = document.getElementById('main-spinner');   
-        if (checkLocalStorage() == 'false') {
-            info.classList.remove('hidden');
-            let timer = setInterval(() => {
-                
-                if (checkLocalStorage() == 'true') {
-                    clearInterval(timer);
-                    info.classList.add('hidden');
-                    func();
-                }
-
-            }, 100);
+    const checkDataReady = (func) => {                     
+        if (checkLocalStorage() == 'false') {            
+            return;
         }
-        else {
+        else {            
             func();
         }
     }
 
     document.getElementById('max-values').addEventListener('click', () => {        
         userConfirm('Вы уверены, что хотите рассчитать максимально возможные параметры по всем имеющимся вещам?', 'countMaxValues');
+    });
+    document.getElementById('top5-values').addEventListener('click', () => {        
+        userConfirm('Вы уверены, что хотите подобрать 5 лучших вариантов по параметрам: Урон + Шок + Броня?', 'topValues');
     });
     document.getElementById('clear-all').addEventListener('click', () => {
         userConfirm('Вы уверены, что хотите очистить все поля ввода?', 'clearInputsValues');
@@ -62,6 +56,10 @@ export default () => {
     acceptButton.addEventListener('click', function() {
         checkDataReady(countMaxValues);        
     });
+    acceptButton.addEventListener('click', function() {
+        checkDataReady(topValues);
+    });
+    
     
     acceptButton.addEventListener('click', clearInputsValues);
     acceptButton.addEventListener('click', clearAll);

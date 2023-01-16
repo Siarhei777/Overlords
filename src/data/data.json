@@ -720,5 +720,24 @@
         "complect": 2,
         "type": 5,
         "level": 9
+    },
+    {        
+        "damageWater": {"value": 0, "name": "Урон (Вода)", "commandValue": "4%"},        
+        "accuracy": {"value": 3, "name": "Точность атаки", "commandValue": 0},
+        "shock": {"value": 1, "name": "Шоковая атака", "commandValue": 0},
+        "antiShock": {"value": 0, "name": "Устойчивость к шоку", "commandValue": 2},
+        "generalProtection": {"value": 5, "name": "Общая защита", "commandValue": 0},        
+        "fairResistance": {"value": 0, "name": "Сопр. (Огонь)", "commandValue": "4%"},        
+        "breakdownOfGeneralProtection": {"value": 0, "name": "Пробой общей защиты", "commandValue": 3},
+        "breakdownOfPhysicalProtection": {"value": 0, "name": "Пробой сопр. физ. урону", "commandValue": "2%"},        
+        "hp": {"value": 4, "name": "Здоровье", "commandValue": 0},
+        "damage": {"value": 3, "name": "Урон", "commandValue": 0},
+        "name": "Мифические Ботинки Света",
+        "now": 0,
+        "image": "sapogi.jpg",
+        "bigImage": "sapogibig.jpg",
+        "complect": 1,
+        "type": 6,
+        "level": 9
     }
 ]

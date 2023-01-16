@@ -27,11 +27,14 @@ nav {
         justify-content: center;
         li {
             user-select: none;            
+            &.disabled .changed-color {                                
+                color: $disabled-text-color;
+            }
             a {
                 background-color: $pagination-background-color !important;
                 color: $primary-text-color !important;                
                 span {
-                    font-size: 14px;                        
+                    font-size: 14px;
                 }
             }
         }

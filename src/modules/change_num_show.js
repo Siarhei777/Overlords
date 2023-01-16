@@ -1,11 +1,10 @@
 /****************************************************************************************************/
 /*Checking the correctness of pressing the pagination buttons and calling the functions for changing the selected set. */
 /****************************************************************************************************/
-
-import {result} from './find_all_variants';
 import show from './create_info_panel';
 import showPers from './init_elements';
 import { beginData } from "./main";
+import {result} from './find_all_variants';
 import changeAll from "./change_all";
 
 export default (direction) => {
@@ -14,7 +13,10 @@ export default (direction) => {
     const decreaseButton = document.getElementById('decrease');
     let currentNum = Number(itemNowValue.innerHTML);
 
-    if ((direction === 'dec' && currentNum <= 1) ||  (direction == 'inc' && (currentNum == result.length || currentNum == 0))) return;
+    const res = (localStorage.getItem('check') == 'all') ? result : JSON.parse(localStorage.getItem('topValues'));
+    
+
+    if ((direction === 'dec' && currentNum <= 1) ||  (direction == 'inc' && (currentNum == res.length || currentNum == 0))) return;
     
     increaseButton.classList.remove('disabled');
     decreaseButton.classList.remove('disabled');
@@ -22,7 +24,7 @@ export default (direction) => {
     switch (direction) {
         case 'inc':
             itemNowValue.innerHTML = ++currentNum;
-            if (currentNum == result.length) increaseButton.classList.add('disabled');            
+            if (currentNum == res.length) increaseButton.classList.add('disabled');            
             break;
         case 'dec':
             itemNowValue.innerHTML = --currentNum;
@@ -30,7 +32,7 @@ export default (direction) => {
             break;
     }   
 
-    show('count-parameters', result[currentNum - 1]);
-    showPers(beginData.filter((el, ind) => result[currentNum - 1].num.indexOf(ind) !== -1), 2);
-    changeAll(result[currentNum - 1].num);    
+    show('count-parameters', res[currentNum - 1]);
+    showPers(beginData.filter((el, ind) => res[currentNum - 1].num.indexOf(ind) !== -1), 2);
+    changeAll(res[currentNum - 1].num);    
 }

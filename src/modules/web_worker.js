@@ -69,7 +69,8 @@ const findMaxValues = (el, rezArray) => {
 onmessage = (e) => {    
     const data = e.data.object;
     const rezArray = new Etalon();
-    const funcName = e.data.func;   
+    const funcName = e.data.func; 
+    const topRezult = [];  
     let forms;
 
     if (funcName == 'find_all_variants') {
@@ -158,7 +159,23 @@ onmessage = (e) => {
 
     const indexes = [[{num: 0, start: 0}, {num: 1, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 7, start: 0}, {num: 8, start: 0}], [{num: 0, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 8, start: 0}, {num: 9, start: 0}]];
     
-    let count = 0;
+    const countValFuctorial = (val, count) => {        
+        if (count == 0) {
+            return val;
+        } else {
+            return val + countValFuctorial(count, count - 1);
+        }        
+    }
+
+    const countMultiple = (val, ...arr) => {
+        return arr.reduce((iter, el) => iter * el, val);
+    }
+
+    //Осталось домножить на длинны оставшихся вещей!:
+    let countProgress = 1; 
+    let currentProgress = 0;   
+    const countAllValues = countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[1].length, all[2].length, all[3].length, all[5].length, all[6].length, all[7].length, all[8].length) + countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[2].length, all[3].length, all[5].length, all[6].length, all[8].length, all[9].length);
+    const val1Percent = Math.trunc(countAllValues / 100);
 
     indexes.forEach(arr => {
         for (let col1 = 0; col1 < all[4].length - 1; col1++) {
@@ -175,6 +192,11 @@ onmessage = (e) => {
                         promArray.push(all[el.num][el.start]);
                     });                
 
+                    if (++currentProgress == val1Percent) {
+                        currentProgress = 0;
+                        postMessage(++countProgress);
+                    }
+
                     switch (funcName) {
                         case 'count_max_values':
                             findMaxValues(countVal((promArray.slice(0)).map(val => data[val])),rezArray);        
@@ -184,6 +206,19 @@ onmessage = (e) => {
                                 postMessage(countVal((promArray.slice(0)).map(val => data[val])));
                             }
                             break;
+                        case 'top_values':
+                            const vr = countVal((promArray.slice(0)).map(val => data[val]));
+                            if (topRezult.length < 5) {
+                                topRezult.push(vr);
+                                if (topRezult.length == 5) {
+                                    topRezult.sort((a, b) => a.sum3Parameters.value - b.sum3Parameters.value).reverse();    
+                                }                                
+                            } else {
+                                if (vr.sum3Parameters.value > topRezult[4].sum3Parameters.value) {
+                                    topRezult[4] = Object.assign({}, vr);
+                                    topRezult.sort((a, b) => a.sum3Parameters.value - b.sum3Parameters.value).reverse();
+                                }
+                            }
                     }
 
                     let checkMain = false;
@@ -215,6 +250,9 @@ onmessage = (e) => {
             break; 
         case 'find_all_variants':
             postMessage(null);
+            break; 
+        case 'top_values':
+            postMessage(topRezult);
             break; 
     }
 }
