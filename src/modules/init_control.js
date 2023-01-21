@@ -16,17 +16,17 @@ export default () => {
         return localStorage.getItem('checkDataReady');
     }
 
-    const checkDataReady = (func) => {                     
+    const checkDataReady = (func, num) => {                     
         if (checkLocalStorage() == 'false') {            
             return;
         }
         else {            
-            func();
+            func(num);
         }
     }
 
     document.getElementById('max-values').addEventListener('click', () => {        
-        userConfirm('Вы уверены, что хотите рассчитать максимально возможные параметры по всем имеющимся вещам?', 'countMaxValues');
+        userConfirm('', 'countMaxValues');
     });
     document.getElementById('top5-values').addEventListener('click', () => {        
         userConfirm('Вы уверены, что хотите подобрать 5 лучших вариантов по параметрам: Урон + Шок + Броня?', 'topValues');
@@ -42,7 +42,7 @@ export default () => {
     });
     document.getElementById('inputed-values').addEventListener('click', () => {
         if (checkForm('#pers-data') && checkForm('#command-data')) {                                
-            userConfirm('Вы уверены, что хотите найти все возможные варианты комплектов по заданным параметрам?', 'findAllVariants');            
+            userConfirm('', 'findAllVariants');
         } else {
              userConfirm('Введены ошибочные данные!', '');  
         }
@@ -50,11 +50,15 @@ export default () => {
 
     const acceptButton = document.getElementById('accept');
 
+    const getParameter = () => {
+        return Array.from(document.querySelectorAll('.forms input')).filter(el => el.checked);
+    }
+
     acceptButton.addEventListener('click', function() {
-        checkDataReady(findAllVariants);        
+        checkDataReady(findAllVariants, getParameter()[0].id);
     });
     acceptButton.addEventListener('click', function() {
-        checkDataReady(countMaxValues);        
+        checkDataReady(countMaxValues, getParameter()[0].id);
     });
     acceptButton.addEventListener('click', function() {
         checkDataReady(topValues);
@@ -65,8 +69,11 @@ export default () => {
     acceptButton.addEventListener('click', clearAll);
     acceptButton.addEventListener('click', clearComplect);
 
-    document.getElementById('decrease').addEventListener('click', function() {changeNumShow('dec')});
-    document.getElementById('increase').addEventListener('click', function() {changeNumShow('inc')});
+    document.getElementById('decrease').addEventListener('click', function() {changeNumShow('dec', 2)});
+    document.getElementById('increase').addEventListener('click', function() {changeNumShow('inc', 2)});
+    document.getElementById('decrease3').addEventListener('click', function() {changeNumShow('dec', 1)});
+    document.getElementById('increase3').addEventListener('click', function() {changeNumShow('inc', 1)});
+
     document.getElementById('decrease2').addEventListener('click', listItems);
     document.getElementById('increase2').addEventListener('click', listItems);
 }

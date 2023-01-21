@@ -29,9 +29,10 @@ import bigImg5_3 from '../img/lionring.jpg';
 
 import changeAll from './change_all';
 
-export default (data, type) => {   
+export default (data, type, numNow) => {   
 
-    const allData = (type == 1) ? data.filter(el => el.now) : data;    
+    const allData = (type == 1) ? data.filter(el => (el.now instanceof Array && el.now.indexOf(numNow) != -1)) : data;
+    console.log(allData);
     let elements;
     const container = document.querySelector('.all__items-container');
 
@@ -252,4 +253,29 @@ export default (data, type) => {
             el.prepend(newEl);
         });
     }
+
+    if (type == 1) {
+
+        let max = 0;
+        
+        data.filter(el => el.now instanceof Array).forEach(el => {
+            if (el.now.sort()[el.now.length - 1] > max) {
+                max = el.now.sort()[el.now.length - 1];
+            }
+        });
+        
+        document.getElementById('item-all3').innerHTML = max;
+        document.getElementById('item-now3').innerHTML = numNow;
+        if (numNow == 1) {
+            document.getElementById('decrease3').classList.add('disabled');
+        } else {
+            document.getElementById('decrease3').classList.remove('disabled');
+        }
+        if (numNow == max) {
+            document.getElementById('increase3').classList.add('disabled');
+        } else {
+            document.getElementById('increase3').classList.remove('disabled');
+        }
+    }
+
 }

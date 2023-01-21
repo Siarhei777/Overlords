@@ -9,8 +9,19 @@ import {clearComplect} from "./clear_components";
 import modifyParameters from "./modify_parameters";
 const result = [];
 
-const findAllVariants = () => {
+const findAllVariants = (num) => {
     if (document.getElementById('accept').getAttribute('data-func') != 'findAllVariants') return;
+    
+    document.getElementById('item-now').innerHTML = 0;
+    document.getElementById('item-all').innerHTML = 0;
+    document.getElementById('increase').classList.add('disabled');
+    document.getElementById('decrease').classList.add('disabled');
+
+    changeAll([]);
+    showPers([], 2);        
+    show('count-parameters', null);
+    clearComplect();
+
 
     const progress = document.getElementById('main-spinner');
 
@@ -53,6 +64,7 @@ const findAllVariants = () => {
         const dataWorker = {
             object: modData,         
             forms,   
+            filter: num,
             func: 'find_all_variants'
         };
 

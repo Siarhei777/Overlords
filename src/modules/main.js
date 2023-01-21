@@ -16,9 +16,9 @@ const mainControl = (data) => {
 
     beginData = data;//allItems
 
-    const dataNow = countValues(data, new CurrentData(), 1);//currentSet
+    const dataNow = countValues(data.filter(el => el.now instanceof Array && el.now.indexOf(1) != -1), new CurrentData(), 1);//currentSet
     
-    show(data, 1);
+    show(data, 1, 1);
     show(data, 0);
 
     showInfo('current-parameters',dataNow);

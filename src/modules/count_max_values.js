@@ -5,7 +5,7 @@ import show from './create_info_panel';
 import { beginData } from './main';
 import modifyParameters from './modify_parameters';
 
-export default () => {
+export default (num) => {
 
     const progress = document.getElementById('main-spinner');
 
@@ -16,11 +16,14 @@ export default () => {
         progress.querySelector('.progress-bar').setAttribute('aria-valuenow', val);        
         progress.querySelector('.progress__info').classList.remove('hidden');
         progress.querySelector('.progress__info').innerHTML = text;
-
     }
+
+    const checkStorage = (fieldName) => JSON.parse(localStorage.getItem(fieldName));
     
     if (document.getElementById('accept').getAttribute('data-func') != 'countMaxValues') return;
-    const readyValues = JSON.parse(localStorage.getItem ("maxValues"));
+
+    const readyValues = checkStorage(`maxValues_${num}`);
+
     if (readyValues) {
         document.getElementById('count-parameters').classList.remove('hide');
     
@@ -40,7 +43,8 @@ export default () => {
             console.time('val1');
     
             const dataWorker = {
-                object: modData,            
+                object: modData,     
+                filter: num,
                 func: 'count_max_values'
             };
     
@@ -54,7 +58,20 @@ export default () => {
                     changeVisibleElements('Рассчитываем параметры...', 'false', true, false, 100);
     
                     result = e.data;      
-                    localStorage.setItem('maxValues', JSON.stringify(result));
+
+                    switch (true) {
+                        case num == 'swords':
+                            localStorage.setItem('maxValues_swords', JSON.stringify(result));        
+                            break;
+                        case num == 'spears':
+                            localStorage.setItem('maxValues_spears', JSON.stringify(result));        
+                            break;
+                        case num == 'all':
+                            localStorage.setItem('maxValues_all', JSON.stringify(result));        
+                            break;
+                    }
+
+                    /* localStorage.setItem('maxValues', JSON.stringify(result)); */
                 
                     myWorker.terminate();   
     

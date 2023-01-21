@@ -70,6 +70,7 @@ onmessage = (e) => {
     const data = e.data.object;
     const rezArray = new Etalon();
     const funcName = e.data.func; 
+    const filter = e.data.filter;
     const topRezult = [];  
     let forms;
 
@@ -157,8 +158,7 @@ onmessage = (e) => {
         all[arr[ind].type - 1].push(ind);
     });       
 
-    const indexes = [[{num: 0, start: 0}, {num: 1, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 7, start: 0}, {num: 8, start: 0}], [{num: 0, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 8, start: 0}, {num: 9, start: 0}]];
-    
+        
     const countValFuctorial = (val, count) => {        
         if (count == 0) {
             return val;
@@ -171,10 +171,30 @@ onmessage = (e) => {
         return arr.reduce((iter, el) => iter * el, val);
     }
 
-    //Осталось домножить на длинны оставшихся вещей!:
+    const indexes = [];    
+    let countAllValues;
+
+    if (filter.includes('swords')) {
+        indexes.push([{num: 0, start: 0}, {num: 1, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 7, start: 0}, {num: 8, start: 0}]);
+
+        countAllValues = countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[1].length, all[2].length, all[3].length, all[5].length, all[6].length, all[7].length, all[8].length);
+    } else if (filter.includes('spears')) {
+        indexes.push([{num: 0, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 8, start: 0}, {num: 9, start: 0}]);
+
+        countAllValues = countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[2].length, all[3].length, all[5].length, all[6].length, all[8].length, all[9].length);
+    } else if (filter.includes('all')) {
+        indexes.push([{num: 0, start: 0}, {num: 1, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 7, start: 0}, {num: 8, start: 0}]);
+        indexes.push([{num: 0, start: 0}, {num: 2, start: 0}, {num: 3, start: 0}, {num: 5, start: 0}, {num: 6, start: 0}, {num: 8, start: 0}, {num: 9, start: 0}]);
+
+        countAllValues = countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[1].length, all[2].length, all[3].length, all[5].length, all[6].length, all[7].length, all[8].length) + countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[2].length, all[3].length, all[5].length, all[6].length, all[8].length, all[9].length);
+    } else {
+        console.log('Error!');
+    }
+
+
     let countProgress = 1; 
     let currentProgress = 0;   
-    const countAllValues = countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[1].length, all[2].length, all[3].length, all[5].length, all[6].length, all[7].length, all[8].length) + countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[2].length, all[3].length, all[5].length, all[6].length, all[8].length, all[9].length);
+    
     const val1Percent = Math.trunc(countAllValues / 100);
 
     indexes.forEach(arr => {

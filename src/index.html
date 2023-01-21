@@ -12,11 +12,10 @@
         <noscript style="display: block; padding: 10px; border: 2px solid white; background-color: red; text-align: center; color: white; font-size: 24px; font-weight: bold;">
             При отключенном JavaScript корректная работа приложения невозможна!<br><br>
             Включите JavaScript в настройках безопасности браузера.
-        </noscript>
-        <header>
-            <h1>Подбор комплекта в игре ❝Повелители❞</h1>
-            <a href="https://overlords.ru/" target="_BLANK">Играть: https://overlords.ru</a>
-        </header>
+        </noscript>        
+
+        <h1>Подбор комплекта в игре ❝Повелители❞</h1>
+        <a href="https://overlords.ru/" target="_BLANK">Играть: https://overlords.ru</a>        
                        
         <section class="field-container field-container-1">
             <div class="field" id="field1">
@@ -31,7 +30,24 @@
                 <div class="field__item9 preview" data-bs-toggle="modal" data-bs-target="#mainModal" data-atr="hovered"></div>
                 <div class="field__item10 preview" data-bs-toggle="modal" data-bs-target="#mainModal" data-atr="hovered"></div>
             </div>
-            
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item disabled" id="decrease3">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true" class="changed-color">«</span>
+                        </a>
+                    </li>
+                    <li class="page-item disabled"><a class="page-link" href="#"><span id="item-now3">0</span> из <span id="item-all3">0</span></a></li>
+                    <li class="page-item disabled" id="increase3">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true" class="changed-color">»</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>                
+
+
             <div class="button_container" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-primary btn-sm button_container__button" id="max-values"  data-bs-toggle="modal" data-bs-target="#infoModal">Максимальные<br>значения</button>
                 <button type="button" class="btn btn-primary btn-sm button_container__button" id="inputed-values" data-bs-toggle="modal" data-bs-target="#infoModal">По заданным<br>параметрам</button>
@@ -276,7 +292,7 @@
                 <span class="input-group-text" id="commandDamageDead">Урон (Смерть)</span>
                 <input type="number" class="form-control command" aria-label="Sizing example input" aria-describedby="commandDamageDead" name="damageDead" value="0" min="0" max="1000">
             </div>
-            <div class="input-group input-group-sm mb-3 control-data__input">    
+            <!-- <div class="input-group input-group-sm mb-3 control-data__input">    
                 <span class="input-group-text" id="commandDamageAstral">Урон (Астрал.)</span>
                 <input type="number" class="form-control command" aria-label="Sizing example input" aria-describedby="commandDamageAstral" name="damageAstral" value="0" min="0" max="1000">
             </div>
@@ -291,7 +307,7 @@
             <div class="input-group input-group-sm mb-3 control-data__input">    
                 <span class="input-group-text" id="commandShock">Шоковая атака</span>
                 <input type="number" class="form-control command" aria-label="Sizing example input" aria-describedby="commandShock" name="shock" value="0" min="0" max="1000">
-            </div>
+            </div> -->
             <div class="input-group input-group-sm mb-3 control-data__input">    
                 <span class="input-group-text" id="commandAntiShock">Устойчивость к шоку</span>
                 <input type="number" class="form-control command" aria-label="Sizing example input" aria-describedby="commandAntiShock" name="antiShock" value="0" min="0" max="1000">
@@ -393,7 +409,23 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="reject2"></button>
                 </div>
                 <div class="modal-body">                        
-                    <div class="info" id="control-info-message"></div>
+                    <div class="info">
+                        <div id="control-info-message" class="forms hidden"></div>
+                        <div class="forms hidden" id="wipon">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="swords" value="option1">
+                                <label class="form-check-label" for="swords">Мечи</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="spears" value="option2">
+                                <label class="form-check-label" for="spears">Копья</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="all" value="option3" checked>
+                                <label class="form-check-label" for="all">Все</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" id="accept" data-bs-dismiss="modal" data-check="">Подтвердить</button>

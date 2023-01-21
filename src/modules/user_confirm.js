@@ -6,6 +6,17 @@ export default (text, func) => {
 
     acceptButton.style.display = (!func) ? 'none' : 'block';
     acceptButton.setAttribute('data-func',func);
+
+    document.querySelectorAll('.forms').forEach(el => el.classList.add('hidden'));
     
-    document.getElementById('control-info-message').textContent = text;    
+    console.log(func);
+
+    switch (true) {
+        case (func === 'findAllVariants' || func == 'countMaxValues'):
+            document.getElementById('wipon').classList.remove('hidden');
+            break;
+        default:
+            document.getElementById('control-info-message').innerHTML = text;
+            document.getElementById('control-info-message').classList.remove('hidden');
+    }    
 }
