@@ -5,9 +5,10 @@
 body {        
     scroll-behavior: smooth;
     background-color: $primary-background-color;
-    width: 100%;            
+    width: 100%;        
     overflow-x: hidden;
     overflow-y: scroll;
+    
     margin: 0;    
     .wrapper {        
         min-height: 100vh;

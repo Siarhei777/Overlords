@@ -820,5 +820,20 @@
         "complect": 3,
         "type": 5,
         "level": 9
+    },
+    {        
+        "shock": {"value": 1, "name": "Шоковая атака", "commandValue": 0},        
+        "electricityResistance": {"value": "5%", "name": "Сопр. (Электр.)", "commandValue": "5%"},
+        "waterResistance": {"value": 0, "name": "Сопр. (Вода)", "commandValue": "5%"},
+        "fairResistance": {"value": "7%", "name": "Сопр. (Огонь)", "commandValue": 0},        
+        "breakdownOfGeneralProtection": {"value": 0, "name": "Пробой общей защиты", "commandValue": 2},        
+        "hp": {"value": 56, "name": "Здоровье", "commandValue": 0},        
+        "name": "Мифический Щит Света",
+        "now": 0,
+        "image": "schit.jpg",
+        "bigImage": "schitbig.jpg",
+        "complect": 1,
+        "type": 8,
+        "level": 9
     }
 ]

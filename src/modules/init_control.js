@@ -29,7 +29,7 @@ export default () => {
         userConfirm('', 'countMaxValues');
     });
     document.getElementById('top5-values').addEventListener('click', () => {        
-        userConfirm('Вы уверены, что хотите подобрать 5 лучших вариантов по параметрам: Урон + Шок + Броня?', 'topValues');
+        userConfirm('', 'topValues');
     });
     document.getElementById('clear-all').addEventListener('click', () => {
         userConfirm('Вы уверены, что хотите очистить все поля ввода?', 'clearInputsValues');
@@ -61,7 +61,7 @@ export default () => {
         checkDataReady(countMaxValues, getParameter()[0].id);
     });
     acceptButton.addEventListener('click', function() {
-        checkDataReady(topValues);
+        checkDataReady(topValues, getParameter()[0].id);
     });
     
     

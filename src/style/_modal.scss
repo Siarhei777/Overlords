@@ -1,6 +1,6 @@
 .modal {
     position: absolute !important;
-    z-index: 9999 !important;                
+    z-index: 9999 !important;    
     &-content {
         background-color: $modal-background-color;
         color: $modal-color;        
@@ -9,33 +9,34 @@
             font-weight: normal;
             font-size: 24px;
         }
-        &-body {
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-start;        
-            img {
-                width: 30%;
-            }
-            .info {
-                padding-left: 10px;                          
-                & p {
-                    margin: 0;
-                    font-family: $primary-font-family;
-                    font-size: 12px;
-                }
-                & p:first-child {
-                    display: none;
-                }
-                .danger-text, & p:last-child {
-                    font-size: 16px;
-                    color: red;                
-                    font-weight: bold;
-                }
-                & p:last-child {
-                    font-weight: normal;
-                }
-            }        
+    }    
+    &-body {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;    
+        width: 100%;    
+        img {
+            width: 30% !important;
         }
+        .info {
+            padding-left: 10px;                          
+            & p {
+                margin: 0;
+                font-family: $primary-font-family;
+                font-size: 12px;
+            }
+            & p:first-child {
+                display: none;
+            }
+            .danger-text, & p:last-child {
+                font-size: 16px;
+                color: red;                
+                font-weight: bold;
+            }
+            & p:last-child {
+                font-weight: normal;
+            }
+        }                
     }
     .forms {                    
         display: flex;        

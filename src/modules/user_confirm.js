@@ -12,7 +12,9 @@ export default (text, func) => {
     console.log(func);
 
     switch (true) {
-        case (func === 'findAllVariants' || func == 'countMaxValues'):
+        case (func === 'topValues'):
+            document.getElementById('form-parameters').classList.remove('hidden');
+        case (func === 'findAllVariants' || func == 'countMaxValues' || func === 'topValues'):
             document.getElementById('wipon').classList.remove('hidden');
             break;
         default:

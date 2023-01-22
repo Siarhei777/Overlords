@@ -51,7 +51,7 @@
             <div class="button_container" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-primary btn-sm button_container__button" id="max-values"  data-bs-toggle="modal" data-bs-target="#infoModal">Максимальные<br>значения</button>
                 <button type="button" class="btn btn-primary btn-sm button_container__button" id="inputed-values" data-bs-toggle="modal" data-bs-target="#infoModal">По заданным<br>параметрам</button>
-                <button type="button" class="btn btn-primary btn-sm button_container__button" id="top5-values" data-bs-toggle="modal" data-bs-target="#infoModal">ТОП 5</button>
+                <button type="button" class="btn btn-primary btn-sm button_container__button" id="top5-values" data-bs-toggle="modal" data-bs-target="#infoModal">ТОП</button>
                 <button type="button" id="clear-all" class="btn btn-danger btn-sm button_container__button disabled" data-bs-toggle="modal" data-bs-target="#infoModal">Очистить<br>формы</button>
                 <button type="button" id="clear-complect" class="btn btn-danger btn-sm button_container__button disabled" data-bs-toggle="modal" data-bs-target="#infoModal">Очистить<br>расчеты</button>
                 <button type="button" id="clear-all-max" class="btn btn-danger btn-sm button_container__button disabled" data-bs-toggle="modal" data-bs-target="#infoModal">Очистить<br>все</button>
@@ -292,22 +292,6 @@
                 <span class="input-group-text" id="commandDamageDead">Урон (Смерть)</span>
                 <input type="number" class="form-control command" aria-label="Sizing example input" aria-describedby="commandDamageDead" name="damageDead" value="0" min="0" max="1000">
             </div>
-            <!-- <div class="input-group input-group-sm mb-3 control-data__input">    
-                <span class="input-group-text" id="commandDamageAstral">Урон (Астрал.)</span>
-                <input type="number" class="form-control command" aria-label="Sizing example input" aria-describedby="commandDamageAstral" name="damageAstral" value="0" min="0" max="1000">
-            </div>
-            <div class="input-group input-group-sm mb-3 control-data__input">    
-                <span class="input-group-text" id="commandInitiative">Инициатива</span>
-                <input type="number" class="form-control command" aria-label="Sizing example input" aria-describedby="commandInitiative" name="initiative" value="0" min="0" max="1000">
-            </div>
-            <div class="input-group input-group-sm mb-3 control-data__input">    
-                <span class="input-group-text" id="commandAccuracy">Точность</span>
-                <input type="number" class="form-control command" aria-label="Sizing example input" aria-describedby="commandAccuracy" name="accuracy" value="0" min="0" max="1000">
-            </div>
-            <div class="input-group input-group-sm mb-3 control-data__input">    
-                <span class="input-group-text" id="commandShock">Шоковая атака</span>
-                <input type="number" class="form-control command" aria-label="Sizing example input" aria-describedby="commandShock" name="shock" value="0" min="0" max="1000">
-            </div> -->
             <div class="input-group input-group-sm mb-3 control-data__input">    
                 <span class="input-group-text" id="commandAntiShock">Устойчивость к шоку</span>
                 <input type="number" class="form-control command" aria-label="Sizing example input" aria-describedby="commandAntiShock" name="antiShock" value="0" min="0" max="1000">
@@ -425,6 +409,230 @@
                                 <label class="form-check-label" for="all">Все</label>
                             </div>
                         </div>
+
+                        <div class="forms hidden" id="form-parameters">
+                            <h2>Повелитель</h2>
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" id="count-top">Кол-во:</span>
+                                <input type="number" class="form-control" aria-label="Count result values" aria-describedby="count-top" min="1" max="1000" value="5">
+                            </div>
+                            <div class="pers-checkboxes">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box1" value="allDamage">
+                                    <label class="form-check-label" for="box1">Общий урон</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box2" value="damagePhisical">
+                                    <label class="form-check-label" for="box2">Урон(Физ.)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box3" value="damagePoison">
+                                    <label class="form-check-label" for="box3">Урон(Яд)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box4" value="damageElectricity">
+                                    <label class="form-check-label" for="box4">Урон(Элек.)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box5" value="damageWater">
+                                    <label class="form-check-label" for="box5">Урон(Вода)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box6" value="damageFair">
+                                    <label class="form-check-label" for="box6">Урон(Огонь)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box7" value="damageDead">
+                                    <label class="form-check-label" for="box7">Урон(Смерть)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box8" value="damageAstral">
+                                    <label class="form-check-label" for="box8">Урон(Астрал)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box9" value="initiative">
+                                    <label class="form-check-label" for="box9">Инициатива</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box10" value="accuracy">
+                                    <label class="form-check-label" for="box10">Точность</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box11" value="shock">
+                                    <label class="form-check-label" for="box11">Шок</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box12" value="antiShock">
+                                    <label class="form-check-label" for="box12">Антишок</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box13" value="generalProtection">
+                                    <label class="form-check-label" for="box13">Общая защита</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box14" value="resistancePhysical">
+                                    <label class="form-check-label" for="box14">Сопр(физ)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box15" value="poisonResistance">
+                                    <label class="form-check-label" for="box15">Сопр(яд)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box16" value="electricityResistance">
+                                    <label class="form-check-label" for="box16">Сопр(элект)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box17" value="waterResistance">
+                                    <label class="form-check-label" for="box17">Сопр(вода)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box18" value="fairResistance">
+                                    <label class="form-check-label" for="box18">Сопр(огонь)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box19" value="deadResistance">
+                                    <label class="form-check-label" for="box19">Сопр(смерть)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box20" value="breakdownOfGeneralProtection">
+                                    <label class="form-check-label" for="box20">Пробой общей защиты</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box21" value="breakdownOfPhysicalProtection">
+                                    <label class="form-check-label" for="box21">Пробой сопр.физ.урону</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box22" value="breakdownOfPoisonProtection">
+                                    <label class="form-check-label" for="box22">Пробой сопр.яду</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box23" value="breakdownOfElectricityProtection">
+                                    <label class="form-check-label" for="box23">Пробой сопр.элект.</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box24" value="breakdownOfWaterProtection">
+                                    <label class="form-check-label" for="box24">Пробой сопр.воде</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box25" value="breakdownOfFairProtection">
+                                    <label class="form-check-label" for="box25">Пробой сопр.огню</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box26" value="breakdownOfDeadProtection">
+                                    <label class="form-check-label" for="box26">Пробой сопр.смерти</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box27" value="hp">
+                                    <label class="form-check-label" for="box27">Здоровье</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box28" value="damage">
+                                    <label class="form-check-label" for="box28">Урон</label>
+                                </div>
+                            </div>
+                            
+                            <h2>В т.ч. на команду:</h2>
+
+                            <div class="command-checkboxes">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box29" value="allDamage">
+                                    <label class="form-check-label" for="box29">Общий урон</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box30" value="damagePhisical">
+                                    <label class="form-check-label" for="box30">Урон(Физ.)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box31" value="damagePoison">
+                                    <label class="form-check-label" for="box31">Урон(Яд)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box32" value="damageElectricity">
+                                    <label class="form-check-label" for="box32">Урон(Элек.)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box33" value="damageWater">
+                                    <label class="form-check-label" for="box33">Урон(Вода)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box34" value="damageFair">
+                                    <label class="form-check-label" for="box34">Урон(Огонь)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box35" value="damageDead">
+                                    <label class="form-check-label" for="box35">Урон(Смерть)</label>
+                                </div>                                
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box36" value="antiShock">
+                                    <label class="form-check-label" for="box36">Антишок</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box37" value="generalProtection">
+                                    <label class="form-check-label" for="box37">Общая защита</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box38" value="resistancePhysical">
+                                    <label class="form-check-label" for="box38">Сопр(физ)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box39" value="poisonResistance">
+                                    <label class="form-check-label" for="box39">Сопр(яд)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box40" value="electricityResistance">
+                                    <label class="form-check-label" for="box40">Сопр(элект)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box41" value="waterResistance">
+                                    <label class="form-check-label" for="box41">Сопр(вода)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box42" value="fairResistance">
+                                    <label class="form-check-label" for="box42">Сопр(огонь)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box43" value="deadResistance">
+                                    <label class="form-check-label" for="box43">Сопр(смерть)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box44" value="breakdownOfGeneralProtection">
+                                    <label class="form-check-label" for="box44">Пробой общей защиты</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box45" value="breakdownOfPhysicalProtection">
+                                    <label class="form-check-label" for="box45">Пробой сопр.физ.урону</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box46" value="breakdownOfPoisonProtection">
+                                    <label class="form-check-label" for="box46">Пробой сопр.яду</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box47" value="breakdownOfElectricityProtection">
+                                    <label class="form-check-label" for="box47">Пробой сопр.элект.</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box48" value="breakdownOfWaterProtection">
+                                    <label class="form-check-label" for="box48">Пробой сопр.воде</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box49" value="breakdownOfFairProtection">
+                                    <label class="form-check-label" for="box49">Пробой сопр.огню</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box50" value="breakdownOfDeadProtection">
+                                    <label class="form-check-label" for="box50">Пробой сопр.смерти</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box51" value="hp">
+                                    <label class="form-check-label" for="box51">Здоровье</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="box52" value="damage">
+                                    <label class="form-check-label" for="box52">Урон</label>
+                                </div>                         
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -434,10 +642,5 @@
             </div>
         </div>
     </div>              
-
-    <!-- <button class="btn btn-primary main-spinner hidden" type="button" disabled id="main-spinner">
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        Идет подготовка данных...
-    </button> -->
 </body>
 </html>
