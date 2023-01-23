@@ -71,7 +71,10 @@ onmessage = (e) => {
     const rezArray = new Etalon();
     const funcName = e.data.func; 
     const filter = e.data.filter;
+    const dataFields = e.data.fields;
     const topRezult = [];  
+    const topCount = e.data.count;
+
     let forms;
 
     if (funcName == 'find_all_variants') {
@@ -81,9 +84,7 @@ onmessage = (e) => {
         
     const promArray = [];
     
-    const all = [[], [], [], [], [], [], [], [], [], []];
-
-
+    const all = [[], [], [], [], [], [], [], [], [], []];    
 
     const checkForms = (element, forms) => {
         
@@ -228,14 +229,34 @@ onmessage = (e) => {
                             break;
                         case 'top_values':
                             const vr = countVal((promArray.slice(0)).map(val => data[val]));
-                            if (topRezult.length < 5) {
+
+                            let vremSum = 0;
+                            dataFields.forEach(el => {
+                                if (el.includes('command')) {
+                                    if (vr[el.substring(7).trim()].commandValue != 0) {
+                                        vremSum += vr[el.substring(7).trim()].commandValue;
+                                    } else {
+                                        vremSum += vr[el.substring(7).trim()].commandPercent;
+                                    }
+                                } else {
+                                    if (vr[el].value != 0) {
+                                        vremSum += vr[el].value;
+                                    } else {
+                                        vremSum += vr[el].percent;
+                                    }
+                                }
+                            });
+                            
+                            vr.sum3Parameters.value = vremSum;
+
+                            if (topRezult.length < topCount) {
                                 topRezult.push(vr);
-                                if (topRezult.length == 5) {
+                                if (topRezult.length == topCount) {
                                     topRezult.sort((a, b) => a.sum3Parameters.value - b.sum3Parameters.value).reverse();    
                                 }                                
                             } else {
-                                if (vr.sum3Parameters.value > topRezult[4].sum3Parameters.value) {
-                                    topRezult[4] = Object.assign({}, vr);
+                                if (vr.sum3Parameters.value > topRezult[topCount - 1].sum3Parameters.value) {
+                                    topRezult[topCount - 1] = Object.assign({}, vr);
                                     topRezult.sort((a, b) => a.sum3Parameters.value - b.sum3Parameters.value).reverse();
                                 }
                             }

@@ -16,12 +16,12 @@ export default () => {
         return localStorage.getItem('checkDataReady');
     }
 
-    const checkDataReady = (func, num) => {                     
+    const checkDataReady = (func, num, maxData) => {                     
         if (checkLocalStorage() == 'false') {            
             return;
         }
         else {            
-            func(num);
+            func(num, maxData);
         }
     }
 
@@ -50,9 +50,9 @@ export default () => {
 
     const acceptButton = document.getElementById('accept');
 
-    const getParameter = () => {
-        return Array.from(document.querySelectorAll('.forms input')).filter(el => el.checked);
-    }
+    const getParameter = () => Array.from(document.querySelectorAll('.forms input')).filter(el => el.checked);
+    
+    const getCount = () => Number(document.querySelector('#count-top').value);
 
     acceptButton.addEventListener('click', function() {
         checkDataReady(findAllVariants, getParameter()[0].id);
@@ -61,7 +61,7 @@ export default () => {
         checkDataReady(countMaxValues, getParameter()[0].id);
     });
     acceptButton.addEventListener('click', function() {
-        checkDataReady(topValues, getParameter()[0].id);
+        checkDataReady(topValues, getCount(), getParameter().map(el => el.value));
     });
     
     

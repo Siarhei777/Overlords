@@ -52,6 +52,34 @@
             border-color: $modal-color;
         }    
     }     
+    #form-parameters {
+        flex-direction: column;
+        justify-content: flex-start;        
+        h2 {
+            font-size: calc(0.7rem + 0.7vmin);
+            border-top: 1px solid $modal-color;
+            width: 100%;
+            margin-top: 10px;
+            padding-top: 10px;
+            text-align: center;
+        }
+        .input-group {
+            width: 50%;            
+        }
+        .pers-checkboxes, .command-checkboxes {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            label {
+                font-size: calc(0.4rem + 0.4vmin);
+            }
+            .form-check-inline {
+                width: 33%;                
+                margin-right: 0;
+            }
+        }        
+    }
     #accept {
         background-color: $accept-button-background-color;
         border-color: $accept-button-background-color;

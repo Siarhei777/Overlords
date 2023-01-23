@@ -44,7 +44,7 @@
         position: absolute;
         z-index: 2000;
         top: 0;
-        border: 3px double black;           
+        border: 1px solid $primary-border-color;        
         #field1 & {
             left: 100%;     
         }
@@ -56,10 +56,9 @@
             width: 100%;
             margin: 0;
             color: $primary-text-color;
-            background-color: $primary-background-color;                            
-            font-weight: bold;
+            background-color: $primary-background-color;            
             font-family: $primary-font-family; 
-            padding: .5px;                
+            padding: 1px 5px;
         }
         &>p:first-child, .danger-text, &>p:last-child {
             font-size: 2.8px;
