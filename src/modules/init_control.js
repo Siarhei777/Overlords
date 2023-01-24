@@ -11,17 +11,26 @@ import { findAllVariants } from './find_all_variants';
 import {topValues} from './top_values';
 
 export default () => { 
+
+    //Потом вынести в отдельный модуль, так как есть дубль в find_all_variants:
+    const getInputsData = () => Array.from(document.querySelectorAll('.control-data__input input')).map(el => {
+        return {
+            value: el.value, name: el.name, command: (el.classList.contains('command') ? true : false)
+        }
+    });
+
+    
     
     const checkLocalStorage = () => {
         return localStorage.getItem('checkDataReady');
     }
 
-    const checkDataReady = (func, num, maxData) => {                     
+    const checkDataReady = (func, num, maxData, inputs) => {                     
         if (checkLocalStorage() == 'false') {            
             return;
         }
         else {            
-            func(num, maxData);
+            func(num, maxData, inputs);
         }
     }
 
@@ -61,7 +70,7 @@ export default () => {
         checkDataReady(countMaxValues, getParameter()[0].id);
     });
     acceptButton.addEventListener('click', function() {
-        checkDataReady(topValues, getCount(), getParameter().map(el => el.value));
+        checkDataReady(topValues, getCount(), getParameter().map(el => el.value), getInputsData());
     });
     
     

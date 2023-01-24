@@ -75,13 +75,15 @@ onmessage = (e) => {
     const topRezult = [];  
     const topCount = e.data.count;
 
+    const checkControlDataForms = e.data.paramForms;    
+
     let forms;
 
-    if (funcName == 'find_all_variants') {
+    if (funcName == 'find_all_variants' || funcName == 'top_values') {
         forms = e.data.forms;
         forms = forms.filter(el => Number(el.value) > 0);
-    }
-        
+    }    
+
     const promArray = [];
     
     const all = [[], [], [], [], [], [], [], [], [], []];    
@@ -246,20 +248,27 @@ onmessage = (e) => {
                                     }
                                 }
                             });
-                            
-                            vr.sum3Parameters.value = vremSum;
+                                                    
 
-                            if (topRezult.length < topCount) {
-                                topRezult.push(vr);
-                                if (topRezult.length == topCount) {
-                                    topRezult.sort((a, b) => a.sum3Parameters.value - b.sum3Parameters.value).reverse();    
-                                }                                
+                            if ((checkForms(Object.assign({}, vr), forms) && checkControlDataForms.includes('yes')) || checkControlDataForms.includes('no')) {
+                                vr.sum3Parameters.value = vremSum;    
                             } else {
-                                if (vr.sum3Parameters.value > topRezult[topCount - 1].sum3Parameters.value) {
-                                    topRezult[topCount - 1] = Object.assign({}, vr);
-                                    topRezult.sort((a, b) => a.sum3Parameters.value - b.sum3Parameters.value).reverse();
-                                }
+                                vr.sum3Parameters.value = 0;    
                             }
+
+                            if (vr.sum3Parameters.value != 0) {
+                                if (topRezult.length < topCount) {
+                                    topRezult.push(vr);
+                                    if (topRezult.length == topCount) {
+                                        topRezult.sort((a, b) => a.sum3Parameters.value - b.sum3Parameters.value).reverse();    
+                                    }                                
+                                } else {
+                                    if (vr.sum3Parameters.value > topRezult[topCount - 1].sum3Parameters.value) {
+                                        topRezult[topCount - 1] = Object.assign({}, vr);
+                                        topRezult.sort((a, b) => a.sum3Parameters.value - b.sum3Parameters.value).reverse();
+                                    }
+                                }    
+                            } 
                     }
 
                     let checkMain = false;

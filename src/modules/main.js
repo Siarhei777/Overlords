@@ -9,12 +9,17 @@ import show from './init_elements';
 import showInfo from './create_info_panel';
 import buttonVisibleControl from './buttons_visible_control';
 import initControl from './init_control';
+import { initAll, initInfoElements } from './init_info_block';
 
 const mainControl = (data) => {    
 
     clearStorage();
 
     beginData = data;//allItems
+
+    allItemsArrays = initAll(beginData);
+
+    initInfoElements(allItemsArrays);
 
     const dataNow = countValues(data.filter(el => el.now instanceof Array && el.now.indexOf(1) != -1), new CurrentData(), 1);//currentSet
     
@@ -33,3 +38,4 @@ readData().then((data) => {
 });
 
 export let beginData;
+export let allItemsArrays;

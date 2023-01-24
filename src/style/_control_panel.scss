@@ -1,6 +1,7 @@
 .button_container {
     width: 100%;
     display: flex;
+    grid-area: button-container;
     justify-content: space-between;
     align-items: center;        
     flex-wrap: wrap;        

@@ -8,7 +8,7 @@ import changeAll from "./change_all";
 import {clearComplect} from "./clear_components";
 import modifyParameters from "./modify_parameters";
 
-const topValues = (count, param) => {
+const topValues = (count, param, inputs) => {
     if (document.getElementById('accept').getAttribute('data-func') != 'topValues') return;
 
     let result = [];
@@ -33,7 +33,9 @@ const topValues = (count, param) => {
             func: 'top_values',
             filter: param[0],
             count,
-            fields: param.slice(1)
+            fields: param.slice(1, param.length - 1),
+            paramForms: param.slice(param.length - 1),
+            forms: inputs.slice(0)
         };
         
         myWorker.postMessage(dataWorker);
@@ -42,8 +44,7 @@ const topValues = (count, param) => {
             if (typeof e.data == 'number') {
                 changeVisibleElements(`Осуществляется поиск...`, 'false', true, false, e.data);
             } else {
-                result = e.data.slice(0);         
-                console.log(result);
+                result = e.data.slice(0);                         
                 localStorage.setItem('result', JSON.stringify(result));
                 localStorage.setItem('topValues', JSON.stringify(result));
                 myWorker.terminate();                    

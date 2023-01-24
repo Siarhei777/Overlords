@@ -469,7 +469,7 @@
         "hp": {"value": 15, "name": "Здоровье", "commandValue": 0},
         "damage": {"value": 5, "name": "Урон", "commandValue": 0},
         "name": "Мифическое Кольцо Льва",
-        "now": [1],
+        "now": 0,
         "image": "liongring2.jpg",
         "bigImage": "lionring.jpg",
         "complect": 3,
@@ -814,7 +814,7 @@
         "hp": {"value": 15, "name": "Здоровье", "commandValue": 0},
         "damage": {"value": 5, "name": "Урон", "commandValue": 0},
         "name": "Мифическое Кольцо Льва",
-        "now": 0,
+        "now": [1],
         "image": "liongring2.jpg",
         "bigImage": "lionring.jpg",
         "complect": 3,
@@ -853,6 +853,22 @@
         "bigImage": "kolcobig.jpg",
         "complect": 2,
         "type": 5,
+        "level": 9
+    },
+    {        
+        "damageElectricity": {"value": 8, "name": "Урон (Электр.)", "commandValue": 0},        
+        "damageFair": {"value": 9, "name": "Урон (Огонь)", "commandValue": 0},        
+        "initiative": {"value": 6, "name": "Инициатива", "commandValue": 0},
+        "accuracy": {"value": 8, "name": "Точность атаки", "commandValue": 0},
+        "shock": {"value": 6, "name": "Шоковая атака", "commandValue": 0},        
+        "electricityResistance": {"value": 0, "name": "Сопр. (Электр.)", "commandValue": "4%"},
+        "hp": {"value": 18, "name": "Здоровье", "commandValue": 0},        
+        "name": "Мифические Штаны Света",
+        "now": 0,
+        "image": "shtany.jpg",
+        "bigImage": "shtanybig.jpg",
+        "complect": 1,
+        "type": 7,
         "level": 9
     }
 ]

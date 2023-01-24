@@ -48,16 +48,17 @@
             </nav>                
 
 
-            <div class="button_container" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary btn-sm button_container__button" id="max-values"  data-bs-toggle="modal" data-bs-target="#infoModal">Максимальные<br>значения</button>
-                <button type="button" class="btn btn-primary btn-sm button_container__button" id="inputed-values" data-bs-toggle="modal" data-bs-target="#infoModal">По заданным<br>параметрам</button>
-                <button type="button" class="btn btn-primary btn-sm button_container__button" id="top5-values" data-bs-toggle="modal" data-bs-target="#infoModal">ТОП</button>
-                <button type="button" id="clear-all" class="btn btn-danger btn-sm button_container__button disabled" data-bs-toggle="modal" data-bs-target="#infoModal">Очистить<br>формы</button>
-                <button type="button" id="clear-complect" class="btn btn-danger btn-sm button_container__button disabled" data-bs-toggle="modal" data-bs-target="#infoModal">Очистить<br>расчеты</button>
-                <button type="button" id="clear-all-max" class="btn btn-danger btn-sm button_container__button disabled" data-bs-toggle="modal" data-bs-target="#infoModal">Очистить<br>все</button>
-            </div>   
         </section>
-        
+
+        <div class="button_container" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary btn-sm button_container__button" id="max-values"  data-bs-toggle="modal" data-bs-target="#infoModal">Максимальные<br>значения</button>
+            <button type="button" class="btn btn-primary btn-sm button_container__button" id="inputed-values" data-bs-toggle="modal" data-bs-target="#infoModal">По заданным<br>параметрам</button>
+            <button type="button" class="btn btn-primary btn-sm button_container__button" id="top5-values" data-bs-toggle="modal" data-bs-target="#infoModal">ТОП</button>
+            <button type="button" id="clear-all" class="btn btn-danger btn-sm button_container__button disabled" data-bs-toggle="modal" data-bs-target="#infoModal">Очистить<br>формы</button>
+            <button type="button" id="clear-complect" class="btn btn-danger btn-sm button_container__button disabled" data-bs-toggle="modal" data-bs-target="#infoModal">Очистить<br>расчеты</button>
+            <button type="button" id="clear-all-max" class="btn btn-danger btn-sm button_container__button disabled" data-bs-toggle="modal" data-bs-target="#infoModal">Очистить<br>все</button>
+        </div>   
+
             
         <section class="info-container info-container-1">                
             <div class="alert alert-light parameters" role="alert" id="current-parameters">
@@ -76,12 +77,6 @@
                 <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                 <div class="progress__info"></div>
             </div>
-
-
-            <!-- <button class="btn btn-primary main-spinner hidden" type="button" disabled id="main-spinner">
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Рассчитываем значения...
-            </button> -->
         </section>            
                         
         <div class="field-container field-container-2">
@@ -135,6 +130,21 @@
                     </li>
                 </ul>
             </nav>                
+        </section>
+
+        <section class="game-info">
+            <div class="game-info__container game-info__container-column">
+                <h2>Справочно:</h2>
+                <p>Всего возможных вариантов: <span id="all-sets">0</span></p>
+                <p>в т.ч. с мечами: <span id="swords-sets">0</span></p>
+                <p>в т.ч. с копьями: <span id="spears-sets">0</span></p>    
+            </div>
+            <div class="game-info__container game-info__container-row">
+                <h2>Разработчик:</h2>
+                <p>Эл.почта:<br>jorov77@mail.ru</p>
+                <a href="https://siarhei-zhorau.ru/" target="_BLANK"><img
+            src="img/author_480.webp" alt="Жоров Сергей"></a>                
+            </div>
         </section>
 
                      
@@ -628,7 +638,17 @@
                                 </div>                         
                             </div>
                         </div>
-
+                        <div class="forms hidden" id="inputs-parameters">
+                            <h2>Учитывать введенные параметры форм?</h2>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radio2" id="count-yes" value="yes">
+                                <label class="form-check-label" for="count-yes">да</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="radio2" id="count-no" value="no" checked>
+                                <label class="form-check-label" for="count-no">нет</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

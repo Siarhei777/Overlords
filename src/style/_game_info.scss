@@ -1,0 +1,56 @@
+.game-info {
+    width: 100%;    
+    background-color: $secondary-background-color;
+    border: 1px solid $primary-border-color;
+    border-radius: 5px;
+    grid-area: game-info;
+    padding: 5px 10px;
+    display: flex;    
+    justify-content: space-evenly;
+    height: 100%;
+    font-family: $primary-font-family;
+    color: $primary-text-color;
+    h2 {
+        text-align: center;
+        margin: 0;
+        font-size: calc(0.7rem + 0.7vmin);
+        font-weight: normal;
+        width: 100%;
+    }
+    p {
+        margin: 0;        
+        font-size: calc(0.55rem + 0.55vmin);
+        &:not(:nth-of-type(1)) {
+            text-indent: 5%;            
+        }
+        span {
+            color: $reject-button-background-color;
+            font-weight: bold;
+        }
+    }
+    &__container {
+        display: flex;        
+        padding: 3px;
+        &-row {
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 40%;
+            p {
+                text-align: center;
+            }
+        }
+        &-column {
+            width: 60%;
+            justify-content: flex-start;
+            flex-direction: column;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+}

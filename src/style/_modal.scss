@@ -52,6 +52,18 @@
             border-color: $modal-color;
         }    
     }     
+    #inputs-parameters {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        h2 {
+            font-size: calc(0.7rem + 0.7vmin);
+            border-top: 1px solid $modal-color;
+            width: 100%;
+            margin-top: 10px;
+            padding-top: 10px;
+            text-align: center;
+        }
+    }
     #form-parameters {
         flex-direction: column;
         justify-content: flex-start;        
