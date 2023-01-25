@@ -9,6 +9,15 @@ import changeNumShow from './change_num_show';
 import listItems from './list_items';
 import { findAllVariants } from './find_all_variants';
 import {topValues} from './top_values';
+import { firstData } from "./main";
+import { mainControl } from "./main";
+
+
+import show from "./create_info_panel";
+import showPers from './init_elements';
+import changeAll from "./change_all";
+
+
 
 export default () => { 
 
@@ -18,21 +27,24 @@ export default () => {
             value: el.value, name: el.name, command: (el.classList.contains('command') ? true : false)
         }
     });
-
-    
     
     const checkLocalStorage = () => {
         return localStorage.getItem('checkDataReady');
     }
 
     const checkDataReady = (func, num, maxData, inputs) => {                     
-        if (checkLocalStorage() == 'false') {            
+        if (checkLocalStorage() == 'false') {                 
             return;
         }
         else {            
             func(num, maxData, inputs);
         }
     }
+
+    document.getElementById('change-lvl').addEventListener('click', () => {       
+        event.preventDefault();  
+        userConfirm('Вы уверены, что хотите изменить уровень персонажа?', 'changeLevel');
+    });
 
     document.getElementById('max-values').addEventListener('click', () => {        
         userConfirm('', 'countMaxValues');
@@ -72,8 +84,16 @@ export default () => {
     acceptButton.addEventListener('click', function() {
         checkDataReady(topValues, getCount(), getParameter().map(el => el.value), getInputsData());
     });
-    
-    
+    acceptButton.addEventListener('click', function() {        
+        if (document.getElementById('accept').getAttribute('data-func') != 'changeLevel') return;
+        changeAll([]);
+        showPers([], 2);        
+        show('count-parameters', null);
+        clearComplect();
+
+        mainControl(firstData);
+    });
+
     acceptButton.addEventListener('click', clearInputsValues);
     acceptButton.addEventListener('click', clearAll);
     acceptButton.addEventListener('click', clearComplect);

@@ -8,7 +8,6 @@ body {
     width: 100%;        
     overflow-x: hidden;
     overflow-y: scroll;
-    
     margin: 0;    
     .wrapper {        
         min-height: 100vh;
@@ -30,20 +29,34 @@ body {
         grid-gap: 5px 5px;
     }
 }    
-h1 {        
-    text-align: center;  
-    font-family: $primary-font-family;        
-    font-size: 48px;
-    color: $main-header-color;
-    text-shadow: 2px 2px 3px $main-header-shadow-color;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    font-weight: normal;
+h1 {
+    background: linear-gradient(to bottom, #cfc09f 22%,#634f2c 24%, #cfc09f 26%, #cfc09f 27%,#ffecb3 40%,#3a2c0f 78%); 
     grid-area: header;
-}    
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;    
+    color: #fff;
+    font-family: $main-header-font-family;
+    position: relative;
+    text-transform: uppercase;	
+    font-size: calc(2.2rem + 2.2vmin);
+    font-weight: 400;
+    text-align: justify;
+    margin: 0 auto;
+    &:after {        
+        background: none;
+        content: attr(data-heading);
+        left: 0;
+        top: 0;
+        z-index: -1;
+        position: absolute;
+        text-shadow: 
+            -1px 0 1px #c6bb9f, 
+            0 1px 1px #c6bb9f, 
+            5px 5px 10px rgba(0, 0, 0, 0.4),
+            -5px -5px 10px rgba(0, 0, 0, 0.4);
+    }
+    
+}
 a {
     font-family: $primary-font-family;
     display: flex;

@@ -17,7 +17,7 @@ export default (direction, field) => {
 
     const res = (field == 1) ? null : (localStorage.getItem('check') == 'all') ? result : JSON.parse(localStorage.getItem('topValues'));
 
-    const allLength = (field == 1) ? +document.getElementById('item-all3').innerHTML : res.length;
+    const allLength = (field == 1) ? +document.getElementById('item-all3').innerHTML : (res) ? res.length : 0;
     
     if (direction === 'dec' && currentNum <= 1) return;
     if (direction == 'inc' && (currentNum == allLength || currentNum == 0)) return;    

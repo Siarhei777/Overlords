@@ -11,20 +11,27 @@ import buttonVisibleControl from './buttons_visible_control';
 import initControl from './init_control';
 import { initAll, initInfoElements } from './init_info_block';
 
+const changeLevel = data => data.filter(el => el.level <= Number(document.getElementById('level-value').value));
+
 const mainControl = (data) => {    
 
+    firstData = data;
+
+    console.log(firstData);
+
     clearStorage();
+    document.getElementById('all-items').innerHTML = '';
 
-    beginData = data;//allItems
+    beginData = changeLevel(data);//allItems
 
-    allItemsArrays = initAll(beginData);
+    allItemsArrays = initAll(beginData);    
 
     initInfoElements(allItemsArrays);
 
-    const dataNow = countValues(data.filter(el => el.now instanceof Array && el.now.indexOf(1) != -1), new CurrentData(), 1);//currentSet
+    const dataNow = countValues(beginData.filter(el => el.now instanceof Array && el.now.indexOf(1) != -1), new CurrentData(), 1);//currentSet
     
-    show(data, 1, 1);
-    show(data, 0);
+    show(beginData, 1, 1);
+    show(beginData, 0);
 
     showInfo('current-parameters',dataNow);
 
@@ -39,3 +46,5 @@ readData().then((data) => {
 
 export let beginData;
 export let allItemsArrays;
+export let firstData;
+export {mainControl};

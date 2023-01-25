@@ -4,10 +4,12 @@
 export default (text, func) => {    
     const acceptButton = document.getElementById('accept');    
 
+    console.log(text, func);
+
     acceptButton.style.display = (!func) ? 'none' : 'block';
     acceptButton.setAttribute('data-func',func);
 
-    document.querySelectorAll('.forms').forEach(el => el.classList.add('hidden'));    
+    document.querySelectorAll('.forms').forEach(el => el.classList.add('hidden'));        
 
     switch (true) {
         case (func === 'topValues'):

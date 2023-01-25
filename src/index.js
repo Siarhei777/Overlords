@@ -4,6 +4,6 @@ import './index.scss';
 import 'bootstrap';
 import './data/data.json';
 import './modules/web_worker';
-import './modules/main';
+import './modules/main'; 
 
 

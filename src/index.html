@@ -14,8 +14,8 @@
             Включите JavaScript в настройках безопасности браузера.
         </noscript>        
 
-        <h1>Подбор комплекта в игре ❝Повелители❞</h1>
-        <a href="https://overlords.ru/" target="_BLANK">Играть: https://overlords.ru</a>        
+        <h1 data-heading="Выбор сета в Повелителях" contenteditable>Выбор сета в Повелителях</h1>
+        <a href="https://overlords.ru/" target="_BLANK">На сайт игры: https://overlords.ru</a>
                        
         <section class="field-container field-container-1">
             <div class="field" id="field1">
@@ -133,18 +133,23 @@
         </section>
 
         <section class="game-info">
-            <div class="game-info__container game-info__container-column">
-                <h2>Справочно:</h2>
-                <p>Всего возможных вариантов: <span id="all-sets">0</span></p>
-                <p>в т.ч. с мечами: <span id="swords-sets">0</span></p>
-                <p>в т.ч. с копьями: <span id="spears-sets">0</span></p>    
-            </div>
-            <div class="game-info__container game-info__container-row">
-                <h2>Разработчик:</h2>
-                <p>Эл.почта:<br>jorov77@mail.ru</p>
-                <a href="https://siarhei-zhorau.ru/" target="_BLANK"><img
-            src="img/author_480.webp" alt="Жоров Сергей"></a>                
-            </div>
+            <h2 class="game-info__header">Справочно:</h2>
+            <p class="game-info__text">Всего вариантов: <span id="all-sets">0</span></p>
+            <p class="game-info__text">в т.ч. с мечами: <span id="swords-sets">0</span></p>
+            <p class="game-info__text">в т.ч. с копьями: <span id="spears-sets">0</span></p>    
+                        
+            <h2 class="game-info__header">Макс. уровень:</h2>
+            <div class="input-group game-info__input-block">
+                <span class="input-group-text" id="max-item-level">Уровень</span>
+                <input type="number" class="form-control" aria-label="max-item-level" aria-describedby="inputGroup-sizing-sm" min="1" value="9" max="13" id="level-value">
+            </div>                
+            <button type="button" class="btn btn-danger game-info__button" id="change-lvl"  data-bs-toggle="modal" data-bs-target="#infoModal">Изменить</button>
+
+            
+            <h2 class="game-info__header">Разработчик:</h2>            
+            <p class="game-info__text">jorov77@mail.ru</p>
+            <a href="https://siarhei-zhorau.ru/" target="_BLANK" class="game-info__link"><img
+        src="img/author_480.webp" alt="Жоров Сергей"></a>
         </section>
 
                      

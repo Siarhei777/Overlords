@@ -56,17 +56,22 @@ export default (data, type, numNow) => {
 
     const allElements = (type == 1) ? document.querySelectorAll('#field1>div') : (type == 2) ? document.querySelectorAll('#field2>div') : elements;
     
-    if (type == 2) {
+    if (type == 2 || type == 1) {
         allElements.forEach(el => {
             el.innerHTML = '';
-            el.style.backgroundImage = 'none';
+            el.style = '';
             el.setAttribute('data-bs-target', '');
             el.setAttribute('data-bs-toggle', '');
-            el.setAttribute('data-atr', '');            
+            el.setAttribute('data-atr', '');
+            delete el.parameters;
+            delete el.image;
+            delete el.bigImage;            
         });          
-        document.querySelectorAll('#field2 span').forEach(el => el.remove());
+        document.querySelectorAll(`#field${type} span`).forEach(el => el.remove());
     }    
     
+
+
     if (type == 2 && allData.length > 0) {
         allElements.forEach(el => {
             el.setAttribute('data-bs-target','#mainModal');
@@ -128,11 +133,11 @@ export default (data, type, numNow) => {
                 
         if (type) {
             el.addEventListener('mouseenter', () => {            
-                if (type == 2 && event.target.getAttribute('data-atr') !== 'hovered') return;
+                if (type && event.target.getAttribute('data-atr') !== 'hovered') return;
                 event.target.style.backgroundImage = `url(${event.target.bigImage})`;            
             });
             el.addEventListener('mouseleave', () => {            
-                if (type == 2 && event.target.getAttribute('data-atr') !== 'hovered') return;
+                if (type && event.target.getAttribute('data-atr') !== 'hovered') return;
                 event.target.style.backgroundImage = event.target.image;            
             });    
         }        
@@ -150,6 +155,9 @@ export default (data, type, numNow) => {
                     allElements[element.type - 1].image = `url(${images[element.type - 1]})`;
                     allElements[element.type - 1].bigImage = bigImages[element.type - 1];
                     allElements[element.type - 1].innerHTML = createInfo(element);
+                    allElements[element.type - 1].setAttribute('data-bs-target','#mainModal');
+                    allElements[element.type - 1].setAttribute('data-bs-toggle','modal');
+                    allElements[element.type - 1].setAttribute('data-atr', 'hovered');
                     break;
                 case 6:    
                 case 7:
@@ -160,10 +168,16 @@ export default (data, type, numNow) => {
                     allElements[element.type].image = `url(${images[element.type - 1]})`;
                     allElements[element.type].bigImage = bigImages[element.type - 1];
                     allElements[element.type].innerHTML = createInfo(element);
+                    allElements[element.type].setAttribute('data-bs-target','#mainModal');
+                    allElements[element.type].setAttribute('data-bs-toggle','modal');
+                    allElements[element.type].setAttribute('data-atr', 'hovered');
                     break;
                 case 5:
                     allElements[4 + ++numRing].parameters = element;    
                     allElements[4 + numRing].innerHTML = createInfo(element);                
+                    allElements[4 + numRing].setAttribute('data-bs-target','#mainModal');
+                    allElements[4 + numRing].setAttribute('data-bs-toggle','modal');
+                    allElements[4 + numRing].setAttribute('data-atr', 'hovered');
                     if (element.complect != 3) {
                         allElements[4 + numRing].style.backgroundImage = `url(${images[4]})`;
                         allElements[4 + numRing].image = `url(${images[4]})`;
@@ -177,8 +191,14 @@ export default (data, type, numNow) => {
                 case 10:                
                     allElements[1].parameters = element;    
                     allElements[1].innerHTML = createInfo(element);                
+                    allElements[1].setAttribute('data-bs-target','#mainModal');
+                    allElements[1].setAttribute('data-bs-toggle','modal');
+                    allElements[1].setAttribute('data-atr', 'hovered');
                     allElements[8].parameters = element;  
                     allElements[8].innerHTML = createInfo(element);
+                    allElements[8].setAttribute('data-bs-target','#mainModal');
+                    allElements[8].setAttribute('data-bs-toggle','modal');
+                    allElements[8].setAttribute('data-atr', 'hovered');
                     if (element.complect == 2) {
                         allElements[1].style.backgroundImage = `url(${img10_2})`;
                         allElements[8].style.backgroundImage = `url(${img10_2})`;   
@@ -246,7 +266,7 @@ export default (data, type, numNow) => {
     if ((type == 0 || type == 2) && data.length) {
         const allEls = (type) ? document.querySelectorAll('#field2 .preview') : document.querySelectorAll('#all-items .preview');
         
-        Array.from(allEls).filter(el => el.parameters.now).forEach(el => {
+        Array.from(allEls).filter(el => ('parameters' in el) && el.parameters.now).forEach(el => {
             const newEl = document.createElement('span');
             newEl.textContent ='Одета';
             newEl.classList.add('important-text');

@@ -21,13 +21,29 @@ const countVariants = (all, type) => {
         return arr.reduce((iter, el) => iter * el, val);
     }
 
+    let countRingsStart = 0;
+    let countRingsEnd = 0;
+
+    switch (true) {
+        case (all[4].length == 1):
+            countRingsStart = 1;
+            break;
+        case (all[4].length == 2):    
+            countRingsStart = 2;
+            break;
+        case (all[4].length > 2):    
+            countRingsStart = all[4].length - 1;
+            countRingsEnd = all[4].length - 2;
+            break;
+    }
+
     switch (type) {
         case 'swords':
-            return countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[1].length, all[2].length, all[3].length, all[5].length, all[6].length, all[7].length, all[8].length);            
+            return countMultiple(countValFuctorial(countRingsStart, countRingsEnd), all[0].length, all[1].length, all[2].length, all[3].length, all[5].length, all[6].length, all[7].length, all[8].length);            
         case 'spears':
-            return countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[2].length, all[3].length, all[5].length, all[6].length, all[8].length, all[9].length);
+            return countMultiple(countValFuctorial(countRingsStart, countRingsEnd), all[0].length, all[2].length, all[3].length, all[5].length, all[6].length, all[8].length, all[9].length);
         case 'all':
-            return (countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[1].length, all[2].length, all[3].length, all[5].length, all[6].length, all[7].length, all[8].length) + countMultiple(countValFuctorial(all[4].length - 1, all[4].length - 2), all[0].length, all[2].length, all[3].length, all[5].length, all[6].length, all[8].length, all[9].length));
+            return (countMultiple(countValFuctorial(countRingsStart, countRingsEnd), all[0].length, all[1].length, all[2].length, all[3].length, all[5].length, all[6].length, all[7].length, all[8].length) + countMultiple(countValFuctorial(countRingsStart, countRingsEnd), all[0].length, all[2].length, all[3].length, all[5].length, all[6].length, all[8].length, all[9].length));
     }   
 }
 
