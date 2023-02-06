@@ -2,9 +2,7 @@
 /* Displaying the characteristics of the kit in the information window. */
 /************************************************************************/
 export default (idName, par) => {
-
-    console.log(par);
-    
+        
     const createElement = (name, content, classNm) => {
         const newEl = document.createElement(name);
         newEl.innerHTML = content;

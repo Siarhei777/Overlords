@@ -50,16 +50,14 @@ const findAllVariants = (num) => {
     
 
     const modData = beginData.map(el => modifyParameters(el));
-    console.log(modData);
+    
     document.getElementById('main-spinner').style.animationName = '';
 
     let countVal = 0;
 
     if (typeof Worker !== 'undefined') {        
 
-        const myWorker = new Worker('modules/web_worker.js');
-        
-        console.time('val1');
+        const myWorker = new Worker('modules/web_worker.js');        
 
         const dataWorker = {
             object: modData,         
@@ -68,23 +66,21 @@ const findAllVariants = (num) => {
             func: 'find_all_variants'
         };
 
-        console.time('val2');
-
         myWorker.postMessage(dataWorker);
+        const test = [];      
 
-        myWorker.onmessage = function(e) {            
-            if (e.data) {
+        myWorker.onmessage = function(e) {          
+            if (e.data) {                
                 if (typeof e.data == 'number') {
                     changeVisibleElements(`Подобрано: ${countVal}`, 'false', true, false, e.data);
-                } else {
-                    result.push(e.data);    
-                    ++countVal;
+                } else {                                                     
+                    result.push(e.data);
+                    ++countVal;                    
                 }                
-            } else {
+            } else {                
                 changeVisibleElements(`Подобрано: ${countVal}`, 'false', true, false, e.data);
                 myWorker.terminate();    
                 localStorage.setItem('result', null);
-                console.timeEnd('val2');
 
                 document.getElementById('main-spinner').style.animationName = 'slowHide';
     

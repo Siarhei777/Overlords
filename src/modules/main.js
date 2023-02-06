@@ -15,9 +15,7 @@ const changeLevel = data => data.filter(el => el.level <= Number(document.getEle
 
 const mainControl = (data) => {    
 
-    firstData = data;
-
-    console.log(firstData);
+    firstData = data;    
 
     clearStorage();
     document.getElementById('all-items').innerHTML = '';

@@ -32,7 +32,7 @@ import changeAll from './change_all';
 export default (data, type, numNow) => {   
 
     const allData = (type == 1) ? data.filter(el => (el.now instanceof Array && el.now.indexOf(numNow) != -1)) : data;
-    console.log(allData);
+    
     let elements;
     const container = document.querySelector('.all__items-container');
 

@@ -33,15 +33,14 @@ export default (num) => {
 
         let result = null;
     
-        const modData = beginData.map(el => modifyParameters(el));
+        const modData = beginData.map(el => modifyParameters(el));    
+        
         console.log(modData);
     
         if (typeof Worker !== 'undefined') {        
     
             const myWorker = new Worker('modules/web_worker.js');
-            
-            console.time('val1');
-    
+                
             const dataWorker = {
                 object: modData,     
                 filter: num,
@@ -58,6 +57,7 @@ export default (num) => {
                     changeVisibleElements('Рассчитываем параметры...', 'false', true, false, 100);
     
                     result = e.data;      
+                    console.log(result);
 
                     switch (true) {
                         case num == 'swords':
@@ -82,8 +82,7 @@ export default (num) => {
                     }, 2000);
                     
                     document.getElementById('count-parameters').classList.remove('hide');
-            
-                    console.timeEnd('val1');
+                                
                     show('count-parameters', result);
                 }            
             }

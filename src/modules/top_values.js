@@ -43,11 +43,11 @@ const topValues = (count, param, inputs) => {
         myWorker.onmessage = function(e) {
             if (typeof e.data == 'number') {
                 changeVisibleElements(`Осуществляется поиск...`, 'false', true, false, e.data);
-            } else {
+            } else {                
                 result = e.data.slice(0);                         
                 localStorage.setItem('result', JSON.stringify(result));
                 localStorage.setItem('topValues', JSON.stringify(result));
-                myWorker.terminate();                    
+                myWorker.terminate();
     
                 document.getElementById('main-spinner').style.animationName = 'slowHide';
     
