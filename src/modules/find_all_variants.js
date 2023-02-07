@@ -9,7 +9,7 @@ import {clearComplect} from "./clear_components";
 import modifyParameters from "./modify_parameters";
 const result = [];
 
-const findAllVariants = (num) => {
+const findAllVariants = (num, dt, inp, type) => {
     if (document.getElementById('accept').getAttribute('data-func') != 'findAllVariants') return;
     
     document.getElementById('item-now').innerHTML = 0;
@@ -62,6 +62,7 @@ const findAllVariants = (num) => {
         const dataWorker = {
             object: modData,         
             forms,   
+            type,
             filter: num,
             func: 'find_all_variants'
         };
@@ -72,7 +73,13 @@ const findAllVariants = (num) => {
         myWorker.onmessage = function(e) {          
             if (e.data) {                
                 if (typeof e.data == 'number') {
-                    changeVisibleElements(`Подобрано: ${countVal}`, 'false', true, false, e.data);
+                    if (e.data == -1) {
+                        changeVisibleElements(`Готовим данные...`, 'false', true);
+                    } else if (e.data == 0) {                        
+                        changeVisibleElements(`Осуществляем поиск....: ${countVal}`, 'false', true, false);
+                    } else {
+                        changeVisibleElements(`Подобрано: ${countVal}`, 'false', true, false, e.data);
+                    }
                 } else {                                                     
                     result.push(e.data);
                     ++countVal;                    

@@ -1168,5 +1168,22 @@
         "complect": 1,
         "type": 1,
         "level": 9
+    },
+    {        
+        "initiative": {"value": 3, "name": "Инициатива", "commandValue": 0},
+        "accuracy": {"value": 3, "name": "Точность атаки", "commandValue": 0},        
+        "generalProtection": {"value": 12, "name": "Общая защита", "commandValue": 0},        
+        "breakdownOfGeneralProtection": {"value": 3, "name": "Пробой общей защиты", "commandValue": 0},        
+        "breakdownOfElectricityProtection": {"value": 0, "name": "Пробой сопр. электричеству", "commandValue": "3%"},        
+        "breakdownOfFairProtection": {"value": "4%", "name": "Пробой сопр. огню", "commandValue": 0},
+        "hp": {"value": 22, "name": "Здоровье", "commandValue": 0},
+        "damage": {"value": 6, "name": "Урон", "commandValue": 0},
+        "name": "Мифический меч света",
+        "now": 0,
+        "image": "mech.jpg",
+        "bigImage": "mechbig.jpg",
+        "complect": 1,
+        "type": 2,
+        "level": 9
     }
 ]

@@ -7,7 +7,7 @@ export default (text, func) => {
     acceptButton.style.display = (!func) ? 'none' : 'block';
     acceptButton.setAttribute('data-func',func);
 
-    document.querySelectorAll('.forms').forEach(el => el.classList.add('hidden'));        
+    document.querySelectorAll('.forms, .forms2').forEach(el => el.classList.add('hidden'));
 
     switch (true) {
         case (func === 'topValues'):
@@ -15,6 +15,7 @@ export default (text, func) => {
             document.getElementById('inputs-parameters').classList.remove('hidden');
         case (func === 'findAllVariants' || func == 'countMaxValues' || func === 'topValues'):
             document.getElementById('wipon').classList.remove('hidden');
+            document.getElementById('buttle-type').classList.remove('hidden');
             break;
         default:
             document.getElementById('control-info-message').innerHTML = text;

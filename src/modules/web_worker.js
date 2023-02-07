@@ -1,3 +1,4 @@
+
 /************************************************/
 /* creating the main data array using WebWorker */
 /************************************************/
@@ -51,6 +52,7 @@ class Etalon {
 }
  
 onmessage = (e) => {    
+    const type = e.data.type;
     const data = e.data.object;
     const rezArray = new Etalon();
     const funcName = e.data.func;
@@ -62,6 +64,7 @@ onmessage = (e) => {
     let forms;
 
     if (funcName == 'find_all_variants' || funcName == 'top_values') {
+        postMessage(-1);
         forms = e.data.forms;
         forms = forms.filter(el => Number(el.value) > 0);
     }    
@@ -153,8 +156,12 @@ onmessage = (e) => {
             res.damage.commandPercent += 3;            
         }
         if (countLionItems >= 3) {        
-            res.damage.percent += 10;
-            res.generalProtection.value += 10;
+            if (type.includes('pvp')) {
+                res.damage.percent += 10;
+                res.generalProtection.value += 10;    
+            }
+            /* res.damage.percent += 10;
+            res.generalProtection.value += 10; */
             res.hp.value += 130;
             res.damage.value += 10;
             res.hp.commandValue += 30;            
@@ -260,9 +267,15 @@ onmessage = (e) => {
                     el[0].accuracy.rating += 2;                                        
                     el[0].damage.commandrating += 1.2;
                 }
-                if (lion >= 3) {                                  
-                    el[0].damage.rating += 13;
-                    el[0].generalProtection.rating += 10;
+                if (lion >= 3) {                                      
+                    if (type.includes('pvp')) {
+                        el[0].damage.rating += 13;
+                        el[0].generalProtection.rating += 10;    
+                    } else {
+                        el[0].damage.rating += 10;
+                    }
+                    /* el[0].damage.rating += 13;
+                    el[0].generalProtection.rating += 10; */
                     el[0].hp.rating += 130;                    
                     el[0].hp.commandrating += 30;
                 }
@@ -429,10 +442,6 @@ onmessage = (e) => {
         case 'top_values':            
             if (filter == 'swords') {
                             
-                const countProgress = 0;                
-                    
-                postMessage(countProgress);                
-
                 let workArray = [[], [], [], [], [], [], [], [], []];
                 let itemSort = [];
                 
@@ -494,6 +503,8 @@ onmessage = (e) => {
                 });
                 
                 let currentAddedElement = -1;
+
+                const countProgress = 0;                
                 
                 do {
                     topRezult.length = 0;
@@ -506,7 +517,7 @@ onmessage = (e) => {
                     for (let i7 = 0; i7 < workArray[6].length; i7++) {
                     for (let i8 = 0; i8 < workArray[7].length; i8++) {
                     for (let i9 = 0; i9 < workArray[8].length; i9++) {
-                        
+                                                
                         const ring1 = Number((workArray[4][i5].split(','))[0]);
                         const ring2 = Number((workArray[4][i5].split(','))[1]);
 
@@ -538,19 +549,15 @@ onmessage = (e) => {
 
                     if (topRezult.length > topCount) {
                         topRezult.length = topCount;    
-                    }
-                    
-                    postMessage(Math.trunc(topRezult.length * 100 / topCount));
+                    }                 
+                    postMessage(Math.trunc(topRezult.length * 100 / topCount)); 
                     
                 } while (topRezult.length < topCount && currentAddedElement < itemSort.length);
 
             }
 
             if (filter == 'spears') {
-                const countProgress = 0;            
-                    
-                postMessage(countProgress);                
-
+        
                 let workArray = [[], [], [], [], [], [], [], [], []];
                 let itemSort = [];
                 
@@ -612,7 +619,8 @@ onmessage = (e) => {
                 });
                 
                 let currentAddedElement = -1;
-                
+                const countProgress = 0;                    
+
                 do {
                     topRezult.length = 0;
                     for (let i1 = 0; i1 < workArray[0].length; i1++) {                    
@@ -636,7 +644,7 @@ onmessage = (e) => {
                         } else if (checkControlDataForms.includes('no')) {
                             topRezult.push(result);
                         }
-                    }}}}}}}
+                    }}}}}}}                   
 
                     topRezult.sort((a, b) => {
                         if (a.sum3Parameters.value < b.sum3Parameters.value) {
@@ -652,10 +660,10 @@ onmessage = (e) => {
                         workArray[4].push(itemSort[currentAddedElement].num);
                     } else {
                         workArray[itemSort[currentAddedElement].type - 1].push(itemSort[currentAddedElement].num);
-                    }                    
-                    
+                    }                                                          
+
                     postMessage(Math.trunc(topRezult.length * 100 / topCount));
-                    
+
                 } while (topRezult.length < topCount && currentAddedElement < itemSort.length);
 
                 if (topRezult.length > topCount) {
@@ -663,10 +671,7 @@ onmessage = (e) => {
                 }
             }            
 
-            if (filter == 'all') {
-                const countProgress = 0;                
-                    
-                postMessage(countProgress);
+            if (filter == 'all') {                
 
                 let workArray = [[], [], [], [], [], [], [], [], []];//Тут макс элементы
                 let itemSort = [];
@@ -765,6 +770,7 @@ onmessage = (e) => {
                 });
                 
                 let currentAddedElement = -1;
+                const countProgress = 0;                    
                 
                 do {
                     topRezult.length = 0;
@@ -839,10 +845,10 @@ onmessage = (e) => {
 
                     if (topRezult.length > topCount) {
                         topRezult.length = topCount;    
-                    }
+                    }                    
                     
                     postMessage(Math.trunc(topRezult.length * 100 / topCount));
-                    
+
                 } while (topRezult.length < topCount && currentAddedElement < itemSort.length && currentAddedElement < itemSort2.length);
             }            
             break;            

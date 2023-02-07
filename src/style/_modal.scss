@@ -38,7 +38,7 @@
             }
         }                
     }
-    .forms {                    
+    .forms, .forms2 {
         display: flex;        
         justify-content: space-evenly;                    
         align-items: center;    
@@ -95,9 +95,17 @@
     #accept {
         background-color: $accept-button-background-color;
         border-color: $accept-button-background-color;
+        transition: .2s ease-in all;
+    }
+    #accept:not(.disabled):hover {
+        color: $primary-button-color;
     }
     #reject1 {
         background-color: $reject-button-background-color;
         border-color: $reject-button-background-color;
+        transition: .2s ease-in all;
+    }
+    #reject1:hover {
+        color: $secondary-button-color;
     }
 }

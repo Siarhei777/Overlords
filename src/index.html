@@ -51,7 +51,7 @@
         </section>
 
         <div class="button_container" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary btn-sm button_container__button" id="max-values"  data-bs-toggle="modal" data-bs-target="#infoModal">Максимальные<br>значения</button>
+            <button type="button" class="btn btn-primary btn-sm button_container__button" id="max-values"  data-bs-toggle="modal" data-bs-target="#infoModal">Наибольшие<br>значения</button>
             <button type="button" class="btn btn-primary btn-sm button_container__button" id="inputed-values" data-bs-toggle="modal" data-bs-target="#infoModal">По заданным<br>параметрам</button>
             <button type="button" class="btn btn-primary btn-sm button_container__button" id="top5-values" data-bs-toggle="modal" data-bs-target="#infoModal">ТОП</button>
             <button type="button" id="clear-all" class="btn btn-danger btn-sm button_container__button disabled" data-bs-toggle="modal" data-bs-target="#infoModal">Очистить<br>формы</button>
@@ -422,7 +422,17 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="all" value="all" checked>
                                 <label class="form-check-label" for="all">Все</label>
+                            </div>                                                        
+                        </div>
+                        <div class="forms2 hidden" id="buttle-type">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="pve" value="pve">
+                                <label class="form-check-label" for="pve">ПВЕ</label>
                             </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="pvp" value="pvp" checked>
+                                <label class="form-check-label" for="pvp">ПВП</label>
+                            </div>                                                     
                         </div>
 
                         <div class="forms hidden" id="form-parameters">                            

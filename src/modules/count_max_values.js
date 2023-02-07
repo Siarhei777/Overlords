@@ -5,7 +5,7 @@ import show from './create_info_panel';
 import { beginData } from './main';
 import modifyParameters from './modify_parameters';
 
-export default (num) => {
+export default (num, dat, inp, type) => {
 
     const progress = document.getElementById('main-spinner');
 
@@ -44,6 +44,7 @@ export default (num) => {
             const dataWorker = {
                 object: modData,     
                 filter: num,
+                type: type,
                 func: 'count_max_values'
             };
     
@@ -70,9 +71,7 @@ export default (num) => {
                             localStorage.setItem('maxValues_all', JSON.stringify(result));        
                             break;
                     }
-
-                    /* localStorage.setItem('maxValues', JSON.stringify(result)); */
-                
+               
                     myWorker.terminate();   
     
                     document.getElementById('main-spinner').style.animationName = 'slowHide';
